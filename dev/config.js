@@ -200,29 +200,20 @@ System.config({
     }
   },
   depCache: {
-    "blur-image.js": [
-      "aurelia-framework"
-    ],
     "main.js": [
-      "bootstrap"
-    ],
-    "users.js": [
-      "aurelia-framework",
-      "aurelia-fetch-client",
+      "bootstrap",
       "fetch"
+    ],
+    "welcome.js": [
+      "aurelia-fetch-client",
+      "aurelia-framework"
     ]
   },
   bundles: {
     "app-build.js": [
       "app.html!github:systemjs/plugin-text@0.0.8.js",
       "app.js",
-      "blur-image.js",
-      "child-router.html!github:systemjs/plugin-text@0.0.8.js",
-      "child-router.js",
       "main.js",
-      "nav-bar.html!github:systemjs/plugin-text@0.0.8.js",
-      "users.html!github:systemjs/plugin-text@0.0.8.js",
-      "users.js",
       "welcome.html!github:systemjs/plugin-text@0.0.8.js",
       "welcome.js"
     ],
