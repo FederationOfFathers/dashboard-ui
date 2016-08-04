@@ -1,13 +1,18 @@
 <template>
-        <div if.bind="loginPending">
+        <div if.bind="user.loginPending">
                 Checking your login status
         </div>
-        <div if.bind="!loginPending">
-                <div if.bind="loginAnonymous">
+        <div if.bind="!user.loginPending">
+                <div if.bind="user.loggedOut">
                         Please log in via slack
                 </div>
-                <div if.bind="loginAuthenticated">
-                        Hello. Thanks for being logged in.
+                <div if.bind="user.loggedIn">
+                        <div>Hello <strong>${user.data.real_name}</strong>. Thanks for being logged in.</div>
+                        <br/>
+                        <em>Your Channels</em>
+                        <ul><li repeat.for="channel of user.channels">#${channel.name}</li></ul>
+                        <em>Your Groups</em>
+                        <ul><li repeat.for="group of user.groups">${group.name}</li></ul>
                 </div>
         </div>
 </template>
