@@ -1,8 +1,7 @@
-import {HttpClient} from 'aurelia-fetch-client';
 import {inject} from 'aurelia-framework';
 import {bindable} from "aurelia-framework";
+import {Client} from 'api.js';
 
-@inject(HttpClient)
 export class Hello {
  
         @bindable loginPending=1;
@@ -10,18 +9,7 @@ export class Hello {
         @bindable loginAuthenticated=0;
 
         constructor(http) {
-                this.client = http;
-                this.client.configure(config => {
-                        config
-                        .withBaseUrl('/api/v0/')
-                        .withDefaults({
-                                credentials: 'same-origin',
-                                headers: {
-                                        'Cookie': document.cookie
-                                }
-                        })
-                });
-                this.client.fetch("ping")
+                Client.fetch("ping")
                         .then(data => {
                                 if ( data.status > 299 || data.status < 200 ) {
                                         this.loginAnonymous = 1;
