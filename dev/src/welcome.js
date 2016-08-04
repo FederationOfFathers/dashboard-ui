@@ -1,34 +1,38 @@
-//import {computedFrom} from 'aurelia-framework';
+import {HttpClient} from 'aurelia-fetch-client';
+import {inject} from 'aurelia-framework';
+import {bindable} from "aurelia-framework";
 
-export class Welcome {
-  heading = 'Welcome to the Aurelia Navigation App!';
-  firstName = 'John';
-  lastName = 'Doe';
-  previousValue = this.fullName;
+@inject(HttpClient)
+export class Hello {
+ 
+        @bindable loginPending=1;
+        @bindable loginAnonymous=0;
+        @bindable loginAuthenticated=0;
 
-  //Getters can't be directly observed, so they must be dirty checked.
-  //However, if you tell Aurelia the dependencies, it no longer needs to dirty check the property.
-  //To optimize by declaring the properties that this getter is computed from, uncomment the line below
-  //as well as the corresponding import above.
-  //@computedFrom('firstName', 'lastName')
-  get fullName() {
-    return `${this.firstName} ${this.lastName}`;
-  }
+        constructor(http) {
+                this.client = http;
+                this.client.configure(config => {
+                        config
+                        .withBaseUrl('/api/v0/')
+                        .withDefaults({
+                                credentials: 'same-origin',
+                                headers: {
+                                        'Cookie': document.cookie
+                                }
+                        })
+                });
+                this.client.fetch("ping")
+                        .then(data => {
+                                if ( data.status > 299 || data.status < 200 ) {
+                                        this.loginAnonymous = 1;
+                                } else {
+                                        this.loginAuthenticated = 1;
+                                }
+                                this.loginPending = 0;
+                        }).bind(this);
+        }
 
-  submit() {
-    this.previousValue = this.fullName;
-    alert(`Welcome, ${this.fullName}!`);
-  }
-
-  canDeactivate() {
-    if (this.fullName !== this.previousValue) {
-      return confirm('Are you sure you want to leave?');
-    }
-  }
-}
-
-export class UpperValueConverter {
-  toView(value) {
-    return value && value.toUpperCase();
-  }
+        sayHello() {
+        alert(`Hello ${this.firstName} ${this.lastName}. Nice to meet you.`);
+        }
 }
