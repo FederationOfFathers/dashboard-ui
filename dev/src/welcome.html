@@ -4,7 +4,11 @@
         </div>
         <div if.bind="!user.loginPending">
                 <div if.bind="user.loggedOut">
-                        Please log in via slack
+                        <ol>
+                                <li>Open a DM with @damnbot in Slack</li>
+                                <li>Send him a message with the word "login"</li>
+                                <li>Click the link he sends back to log in</li>
+                        </ol>
                 </div>
                 <div if.bind="user.loggedIn">
                         <div>Hello <strong>${user.data.real_name}</strong>. Thanks for being logged in.</div>
