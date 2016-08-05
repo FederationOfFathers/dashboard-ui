@@ -84,7 +84,9 @@
       "bootstrap": "github:twbs/bootstrap@^3.3.6",
       "fetch": "github:github/fetch@^1.0.0",
       "font-awesome": "npm:font-awesome@4.6.3",
+      "gulp-notify": "npm:gulp-notify@^2.2.0",
       "jquery": "npm:jquery@^2.2.4",
+      "notify-send": "npm:notify-send@^0.1.2",
       "text": "github:systemjs/plugin-text@^0.0.8"
     },
     "devDependencies": {}
