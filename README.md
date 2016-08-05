@@ -1,5 +1,14 @@
-# dashboard-ui
+# Dashboard UI
+
 User Interface for the new dashboard project
+
+# Pre-Requisite
+
+1. NodeJS (https://nodejs.org/) must be installed
+
+# Recommendations
+
+1. To enable your user to npm install -g without sudo: http://stackoverflow.com/a/13021677
 
 # Environment Setup
 
