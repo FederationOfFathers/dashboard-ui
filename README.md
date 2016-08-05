@@ -13,8 +13,8 @@ cd dev
 npm install
 jspm install -y
 
-# How to use this repo
-
-- static assets should be created with a single documented command
-- static assets should be in or compiled into the application folder
-- static assets will be served from /application/
+# Local Dev
+cd dev/
+gulp watch
+Open the local URL it gives you
+Edit files
