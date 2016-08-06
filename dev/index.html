@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Aurelia</title>
     <!--The FontAwesome version is locked at 4.6.3 in the package.json file to keep this from breaking.-->
+    <link rel="stylesheet" href="jspm_packages/github/twbs/bootstrap@3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="jspm_packages/npm/font-awesome@4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/styles.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body aurelia-app="main">
     <!-- The bluebird version is locked at 4.6.3 in the package.json file to keep this from breaking -->
@@ -14,9 +15,12 @@
     <!-- Windows 10 Anniversary Update on 2 August 2016. Once that update has pushed out, you may    -->
     <!-- consider removing bluebird from your project and simply using native promises if you do     -->
     <!-- not need to support Internet Explorer.                                                      -->
+    <script src="jspm_packages/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="jspm_packages/github/twbs/bootstrap@3.3.6/js/bootstrap.min.js"></script>
     <script src="jspm_packages/npm/bluebird@3.4.1/js/browser/bluebird.min.js"></script>
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
+    <script src="jspm_packages/github/twbs/bootstrap@3.3.6/css/bootstrap.min.css"></script>
     <script>
       System.import('aurelia-bootstrapper');
     </script>
