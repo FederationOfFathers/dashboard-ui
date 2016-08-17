@@ -1,0 +1,1 @@
+Check out the [CLI](https://github.com/aurelia/cli) for more details.
