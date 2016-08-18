@@ -1,4 +1,5 @@
 import environment from './environment';
+import 'bootstrap';
 
 //Configure Bluebird Promises.
 //Note: You may want to use environment-specific configuration.
@@ -12,6 +13,8 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .feature('resources');
+
+  aurelia.use.plugin('aurelia-animator-css')
 
   if (environment.debug) {
     aurelia.use.developmentLogging();

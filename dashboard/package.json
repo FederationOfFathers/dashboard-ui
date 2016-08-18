@@ -15,6 +15,7 @@
   },
   "peerDependencies": {},
   "devDependencies": {
+    "aurelia-animator-css": "^1.0.0",
     "aurelia-cli": "^0.17.0",
     "aurelia-testing": "^1.0.0-beta.1.0.0",
     "aurelia-tools": "^0.2.2",
@@ -29,6 +30,7 @@
     "babel-preset-es2015-loose": "^7.0.0",
     "babel-preset-stage-1": "^6.5.0",
     "babel-register": "^6.9.0",
+    "bootstrap": "^3.3.7",
     "browser-sync": "^2.13.0",
     "connect-history-api-fallback": "^1.2.0",
     "gulp": "github:gulpjs/gulp#4.0",
@@ -41,6 +43,7 @@
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^2.0.0-alpha",
     "jasmine-core": "^2.4.1",
+    "jquery": "^3.1.0",
     "karma": "^0.13.22",
     "karma-babel-preprocessor": "^6.0.1",
     "karma-chrome-launcher": "^1.0.1",
