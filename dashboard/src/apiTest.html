@@ -1,5 +1,19 @@
 <template>
     <section class="au-animate">
         <h1>Welcome to the api tests page</h1>
+
+        <label>Admin: ${isAdmin}</label>
+        <br />
+        <label>User Data:</label><span>${stringifiedUser}</span>
+        <br />
+        <label for="channels">User Channels:</label>
+        <ul id="channels">
+            <li repeat.for="channel of userChannels">${channel.name}</li>
+        </ul>
+        <br />
+        <label for="groups">User Groups:</label>
+        <ul id="groups">
+            <li repeat.for="group of userGroups">${group.name}</li>
+        </ul>
     </section>
 </template>
