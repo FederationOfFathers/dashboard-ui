@@ -2,7 +2,7 @@ import {inject} from 'aurelia-framework';
 import {UserApi} from 'api/user';
 
 @inject(UserApi)
-export class ApiTest{
+export class ApiTests{
     constructor(userApi){
         this.UserApi = userApi;
 

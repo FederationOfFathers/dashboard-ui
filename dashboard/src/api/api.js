@@ -41,13 +41,30 @@ export class Api {
                 return response.json()
             })
     }
-    put(){
-        throw Error('Not yet implemented');
+    put(url, payload){       
+        //TODO: Test to make sure this works. Not tested yet
+        var data = new FormData();
+        data.append( "json", JSON.stringify( payload ) );
+        return this.http.fetch(url,
+            {
+                method: "put",
+                body: data
+            })
+            .then(response => {
+                return response.json()
+            })
     }
     post(){
         throw Error('Not yet implemented');
     }
-    delete(){
-        throw Error('Not yet implemented');
+    delete(url){
+        //TODO: Test to make sure this works. Not tested yet
+        return this.http.fetch(url,
+            {
+                method: "delete",
+            })
+            .then(response => {
+                return response.json()
+            })
     }
 }

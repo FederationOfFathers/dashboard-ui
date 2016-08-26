@@ -3,7 +3,7 @@ export class App {
     config.title = 'FoF Dashboard';
     config.map([
       { route: ['', 'welcome'], name: 'welcome',      moduleId: 'welcome',      nav: true, title: 'Welcome' },
-      { route: 'apiTest',         name: 'apiTest',        moduleId: 'apiTest',        nav: true, title: 'API Tests' }
+      { route: 'apiTest',         name: 'apiTest',        moduleId: 'apiTests/apiTests',        nav: true, title: 'API Tests' }
     ]);
 
     this.router = router;
