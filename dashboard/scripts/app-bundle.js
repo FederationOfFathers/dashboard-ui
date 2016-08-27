@@ -1,118 +1,75 @@
-define('apiTest',['exports', 'aurelia-framework', 'api/user'], function (exports, _aureliaFramework, _user) {
-    'use strict';
+define('app',['exports', 'aurelia-framework', 'aurelia-router', 'api/api'], function (exports, _aureliaFramework, _aureliaRouter, _api) {
+        'use strict';
 
-    Object.defineProperty(exports, "__esModule", {
-        value: true
-    });
-    exports.ApiTest = undefined;
+        Object.defineProperty(exports, "__esModule", {
+                value: true
+        });
+        exports.App = undefined;
 
-    function _classCallCheck(instance, Constructor) {
-        if (!(instance instanceof Constructor)) {
-            throw new TypeError("Cannot call a class as a function");
-        }
-    }
+        var _dec, _class;
 
-    var _createClass = function () {
-        function defineProperties(target, props) {
-            for (var i = 0; i < props.length; i++) {
-                var descriptor = props[i];
-                descriptor.enumerable = descriptor.enumerable || false;
-                descriptor.configurable = true;
-                if ("value" in descriptor) descriptor.writable = true;
-                Object.defineProperty(target, descriptor.key, descriptor);
-            }
+        function _classCallCheck(instance, Constructor) {
+                if (!(instance instanceof Constructor)) {
+                        throw new TypeError("Cannot call a class as a function");
+                }
         }
 
-        return function (Constructor, protoProps, staticProps) {
-            if (protoProps) defineProperties(Constructor.prototype, protoProps);
-            if (staticProps) defineProperties(Constructor, staticProps);
-            return Constructor;
-        };
-    }();
+        var App = exports.App = function () {
+                function App() {
+                        _classCallCheck(this, App);
+                }
 
-    var _dec, _class;
+                App.prototype.configureRouter = function configureRouter(config, router) {
+                        config.title = 'FoF Dashboard';
+                        config.addPipelineStep('authorize', AuthorizeStep);
+                        config.map([{ route: ['', 'welcome'], name: 'welcome', moduleId: 'welcome', nav: true, title: 'Welcome', settings: { roles: ["user"] } }, { route: 'apiTest', name: 'apiTest', moduleId: 'apiTests/apiTests', nav: true, title: 'API Tests', settings: { roles: ["user"] } }, { route: 'admin', name: 'admin', moduleId: 'admin/index', nav: false, title: "Admin", settings: { roles: ["user", "admin"] } }, { route: 'login', name: 'login', moduleId: 'login', nav: false, title: "Please Log In", settings: { roles: ["anonymous"] } }]);
 
-    var ApiTest = exports.ApiTest = (_dec = (0, _aureliaFramework.inject)(_user.UserApi), _dec(_class = function () {
-        function ApiTest(userApi) {
-            _classCallCheck(this, ApiTest);
+                        this.router = router;
+                };
 
-            this.UserApi = userApi;
+                return App;
+        }();
 
-            this.userProfile = {
-                admin: false,
-                channels: [],
-                groups: [],
-                user: {}
-            };
-        }
+        var AuthorizeStep = (_dec = (0, _aureliaFramework.inject)(_api.Api), _dec(_class = function () {
+                function AuthorizeStep(api) {
+                        var _this = this;
 
-        ApiTest.prototype.activate = function activate() {
-            var _this = this;
+                        _classCallCheck(this, AuthorizeStep);
 
-            this.UserApi.ping().then(function (data) {
-                console.log(data);
+                        this.admin = false;
+                        this.user = false;
 
-                _this.userProfile.admin = data.admin;
-                _this.userProfile.channels = data.channels;
-                _this.userProfile.groups = data.groups;
-                _this.userProfile.user = data.user;
-            }).catch(function (err) {
-                console.error(err);
-            });
-        };
+                        api.get("ping").then(function (data) {
+                                _this.admin = data.admin;
+                                _this.user = true;
+                        }).catch(function (err) {});
+                }
 
-        _createClass(ApiTest, [{
-            key: 'isAdmin',
-            get: function get() {
-                return this.userProfile.admin;
-            }
-        }, {
-            key: 'stringifiedUser',
-            get: function get() {
-                return JSON.stringify(this.userProfile.user);
-            }
-        }, {
-            key: 'userChannels',
-            get: function get() {
-                return this.userProfile.channels;
-            }
-        }, {
-            key: 'userGroups',
-            get: function get() {
-                return this.userProfile.groups;
-            }
-        }]);
+                AuthorizeStep.prototype.run = function run(navigationInstruction, next) {
+                        if (navigationInstruction.getAllInstructions().some(function (i) {
+                                return i.config.settings.roles.indexOf('admin') !== -1;
+                        })) {
+                                if (!this.admin) {
+                                        return next.cancel(new _aureliaRouter.Redirect('welcome'));
+                                }
+                        } else if (navigationInstruction.getAllInstructions().some(function (i) {
+                                return i.config.settings.roles.indexOf('user') !== -1;
+                        })) {
+                                if (!this.user) {
+                                        return next.cancel(new _aureliaRouter.Redirect('login'));
+                                }
+                        } else if (navigationInstruction.getAllInstructions().some(function (i) {
+                                return i.config.settings.roles.indexOf('anonymous') !== -1;
+                        })) {
+                                if (this.user) {
+                                        return next.cancel(new _aureliaRouter.Redirect('welcome'));
+                                }
+                        }
+                        return next();
+                };
 
-        return ApiTest;
-    }()) || _class);
-});
-define('app',['exports'], function (exports) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  var App = exports.App = function () {
-    function App() {
-      _classCallCheck(this, App);
-    }
-
-    App.prototype.configureRouter = function configureRouter(config, router) {
-      config.title = 'FoF Dashboard';
-      config.map([{ route: ['', 'welcome'], name: 'welcome', moduleId: 'welcome', nav: true, title: 'Welcome' }, { route: 'apiTest', name: 'apiTest', moduleId: 'apiTests/apiTests', nav: true, title: 'API Tests' }]);
-
-      this.router = router;
-    };
-
-    return App;
-  }();
+                return AuthorizeStep;
+        }()) || _class);
 });
 define('environment',["exports"], function (exports) {
   "use strict";
@@ -124,6 +81,23 @@ define('environment',["exports"], function (exports) {
     debug: true,
     testing: true
   };
+});
+define('login',["exports"], function (exports) {
+    "use strict";
+
+    Object.defineProperty(exports, "__esModule", {
+        value: true
+    });
+
+    function _classCallCheck(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+            throw new TypeError("Cannot call a class as a function");
+        }
+    }
+
+    var Login = exports.Login = function Login() {
+        _classCallCheck(this, Login);
+    };
 });
 define('main',['exports', './environment', 'bootstrap'], function (exports, _environment) {
   'use strict';
@@ -343,85 +317,6 @@ define('api/streams',['exports', 'aurelia-framework', './api'], function (export
         return StreamsApi;
     }()) || _class);
 });
-define('resources/index',["exports"], function (exports) {
-  "use strict";
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.configure = configure;
-  function configure(config) {}
-});
-define('resources/elements/nav-bar',['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-  exports.NavBarCustomElement = undefined;
-
-  function _initDefineProp(target, property, descriptor, context) {
-    if (!descriptor) return;
-    Object.defineProperty(target, property, {
-      enumerable: descriptor.enumerable,
-      configurable: descriptor.configurable,
-      writable: descriptor.writable,
-      value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
-    });
-  }
-
-  function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError("Cannot call a class as a function");
-    }
-  }
-
-  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
-    var desc = {};
-    Object['ke' + 'ys'](descriptor).forEach(function (key) {
-      desc[key] = descriptor[key];
-    });
-    desc.enumerable = !!desc.enumerable;
-    desc.configurable = !!desc.configurable;
-
-    if ('value' in desc || desc.initializer) {
-      desc.writable = true;
-    }
-
-    desc = decorators.slice().reverse().reduce(function (desc, decorator) {
-      return decorator(target, property, desc) || desc;
-    }, desc);
-
-    if (context && desc.initializer !== void 0) {
-      desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
-      desc.initializer = undefined;
-    }
-
-    if (desc.initializer === void 0) {
-      Object['define' + 'Property'](target, property, desc);
-      desc = null;
-    }
-
-    return desc;
-  }
-
-  function _initializerWarningHelper(descriptor, context) {
-    throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
-  }
-
-  var _desc, _value, _class, _descriptor;
-
-  var NavBarCustomElement = exports.NavBarCustomElement = (_class = function NavBarCustomElement() {
-    _classCallCheck(this, NavBarCustomElement);
-
-    _initDefineProp(this, 'router', _descriptor, this);
-
-    this.message = 'hello world';
-  }, (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'router', [_aureliaFramework.bindable], {
-    enumerable: true,
-    initializer: null
-  })), _class);
-});
 define('api/user',['exports', 'aurelia-framework', './api'], function (exports, _aureliaFramework, _api) {
     'use strict';
 
@@ -460,13 +355,13 @@ define('api/user',['exports', 'aurelia-framework', './api'], function (exports, 
         return UserApi;
     }()) || _class);
 });
-define('apiTests/apiTest',['exports', 'aurelia-framework', 'api/user'], function (exports, _aureliaFramework, _user) {
+define('admin/index',['exports', 'aurelia-framework', 'api/user'], function (exports, _aureliaFramework, _user) {
     'use strict';
 
     Object.defineProperty(exports, "__esModule", {
         value: true
     });
-    exports.ApiTest = undefined;
+    exports.admin = undefined;
 
     function _classCallCheck(instance, Constructor) {
         if (!(instance instanceof Constructor)) {
@@ -494,9 +389,9 @@ define('apiTests/apiTest',['exports', 'aurelia-framework', 'api/user'], function
 
     var _dec, _class;
 
-    var ApiTest = exports.ApiTest = (_dec = (0, _aureliaFramework.inject)(_user.UserApi), _dec(_class = function () {
-        function ApiTest(userApi) {
-            _classCallCheck(this, ApiTest);
+    var admin = exports.admin = (_dec = (0, _aureliaFramework.inject)(_user.UserApi), _dec(_class = function () {
+        function admin(userApi) {
+            _classCallCheck(this, admin);
 
             this.UserApi = userApi;
 
@@ -508,7 +403,7 @@ define('apiTests/apiTest',['exports', 'aurelia-framework', 'api/user'], function
             };
         }
 
-        ApiTest.prototype.activate = function activate() {
+        admin.prototype.activate = function activate() {
             var _this = this;
 
             this.UserApi.ping().then(function (data) {
@@ -523,7 +418,7 @@ define('apiTests/apiTest',['exports', 'aurelia-framework', 'api/user'], function
             });
         };
 
-        _createClass(ApiTest, [{
+        _createClass(admin, [{
             key: 'isAdmin',
             get: function get() {
                 return this.userProfile.admin;
@@ -533,19 +428,9 @@ define('apiTests/apiTest',['exports', 'aurelia-framework', 'api/user'], function
             get: function get() {
                 return JSON.stringify(this.userProfile.user);
             }
-        }, {
-            key: 'userChannels',
-            get: function get() {
-                return this.userProfile.channels;
-            }
-        }, {
-            key: 'userGroups',
-            get: function get() {
-                return this.userProfile.groups;
-            }
         }]);
 
-        return ApiTest;
+        return admin;
     }()) || _class);
 });
 define('apiTests/apiTests',['exports', 'aurelia-framework', 'api/user'], function (exports, _aureliaFramework, _user) {
@@ -636,11 +521,90 @@ define('apiTests/apiTests',['exports', 'aurelia-framework', 'api/user'], functio
         return ApiTests;
     }()) || _class);
 });
-define('text!apiTest.html', ['module'], function(module) { module.exports = "<template>\n    <section class=\"au-animate\">\n        <h1>Welcome to the api tests page</h1>\n\n        <label>Admin: ${isAdmin}</label>\n        <br />\n        <label>User Data:</label><span>${stringifiedUser}</span>\n        <br />\n        <label for=\"channels\">User Channels:</label>\n        <ul id=\"channels\">\n            <li repeat.for=\"channel of userChannels\">${channel.name}</li>\n        </ul>\n        <br />\n        <label for=\"groups\">User Groups:</label>\n        <ul id=\"groups\">\n            <li repeat.for=\"group of userGroups\">${group.name}</li>\n        </ul>\n    </section>\n</template>"; });
+define('resources/index',["exports"], function (exports) {
+  "use strict";
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.configure = configure;
+  function configure(config) {}
+});
+define('resources/elements/nav-bar',['exports', 'aurelia-framework'], function (exports, _aureliaFramework) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.NavBarCustomElement = undefined;
+
+  function _initDefineProp(target, property, descriptor, context) {
+    if (!descriptor) return;
+    Object.defineProperty(target, property, {
+      enumerable: descriptor.enumerable,
+      configurable: descriptor.configurable,
+      writable: descriptor.writable,
+      value: descriptor.initializer ? descriptor.initializer.call(context) : void 0
+    });
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _applyDecoratedDescriptor(target, property, decorators, descriptor, context) {
+    var desc = {};
+    Object['ke' + 'ys'](descriptor).forEach(function (key) {
+      desc[key] = descriptor[key];
+    });
+    desc.enumerable = !!desc.enumerable;
+    desc.configurable = !!desc.configurable;
+
+    if ('value' in desc || desc.initializer) {
+      desc.writable = true;
+    }
+
+    desc = decorators.slice().reverse().reduce(function (desc, decorator) {
+      return decorator(target, property, desc) || desc;
+    }, desc);
+
+    if (context && desc.initializer !== void 0) {
+      desc.value = desc.initializer ? desc.initializer.call(context) : void 0;
+      desc.initializer = undefined;
+    }
+
+    if (desc.initializer === void 0) {
+      Object['define' + 'Property'](target, property, desc);
+      desc = null;
+    }
+
+    return desc;
+  }
+
+  function _initializerWarningHelper(descriptor, context) {
+    throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
+  }
+
+  var _desc, _value, _class, _descriptor;
+
+  var NavBarCustomElement = exports.NavBarCustomElement = (_class = function NavBarCustomElement() {
+    _classCallCheck(this, NavBarCustomElement);
+
+    _initDefineProp(this, 'router', _descriptor, this);
+
+    this.message = 'hello world';
+  }, (_descriptor = _applyDecoratedDescriptor(_class.prototype, 'router', [_aureliaFramework.bindable], {
+    enumerable: true,
+    initializer: null
+  })), _class);
+});
 define('text!app.html', ['module'], function(module) { module.exports = "<template>\n  <require from='./resources/elements/nav-bar'></require>\n  <require from='./app.css'></require>\n\n  <nav-bar router.bind=\"router\"></nav-bar>\n\n  <div class=\"page-host\">\n    <router-view></router-view>\n  </div>\n</template>\n"; });
 define('text!app.css', ['module'], function(module) { module.exports = "body {\n  margin: 0; }\n\n.page-host {\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 50px;\n  bottom: 0;\n  overflow-x: hidden;\n  overflow-y: auto; }\n\n@media print {\n  .page-host {\n    position: absolute;\n    left: 10px;\n    right: 0;\n    top: 50px;\n    bottom: 0;\n    overflow-y: inherit;\n    overflow-x: inherit; } }\n\nsection {\n  margin: 0 20px; }\n\n.navbar-nav li.loader {\n  margin: 12px 24px 0 6px; }\n\n/* animate page transitions */\nsection.au-enter-active {\n  -webkit-animation: fadeInRight 1s;\n  animation: fadeInRight 1s; }\n\ndiv.au-stagger {\n  /* 50ms will be applied between each successive enter operation */\n  -webkit-animation-delay: 50ms;\n  animation-delay: 50ms; }\n\n/* animation definitions */\n@-webkit-keyframes fadeInRight {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    transform: none; } }\n\n@keyframes fadeInRight {\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(100%, 0, 0);\n    -ms-transform: translate3d(100%, 0, 0);\n    transform: translate3d(100%, 0, 0); }\n  100% {\n    opacity: 1;\n    -webkit-transform: none;\n    -ms-transform: none;\n    transform: none; } }\n\n@-webkit-keyframes fadeIn {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@keyframes fadeIn {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n"; });
+define('text!login.html', ['module'], function(module) { module.exports = "<template>\n        <section class=\"au-animate\">\n                <h1>Please log in</h1>\n                <p>Send a message of just \"login\" to @damnbot in slack. Click the link he replies with.</p>\n        </section>\n</template>\n"; });
 define('text!welcome.html', ['module'], function(module) { module.exports = "<template>\n    <section class=\"au-animate\">\n        <h1>Welcome home</h1>\n    </section>\n</template>"; });
-define('text!resources/elements/nav-bar.html', ['module'], function(module) { module.exports = "<template>\n  <nav class=\"navbar navbar-default navbar-fixed-top\" role=\"navigation\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#skeleton-navigation-navbar-collapse\">\n        <span class=\"sr-only\">Toggle Navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">\n        <i class=\"fa fa-home\"></i>\n        <span>${router.title}</span>\n      </a>\n    </div>\n\n    <div class=\"collapse navbar-collapse\" id=\"skeleton-navigation-navbar-collapse\">\n      <ul class=\"nav navbar-nav\">\n        <li repeat.for=\"row of router.navigation\" class=\"${row.isActive ? 'active' : ''}\">\n          <a data-toggle=\"collapse\" data-target=\"#skeleton-navigation-navbar-collapse.in\" href.bind=\"row.href\">${row.title}</a>\n        </li>\n      </ul>\n\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li class=\"loader\" if.bind=\"router.isNavigating\">\n          <i class=\"fa fa-spinner fa-spin fa-2x\"></i>\n        </li>\n      </ul>\n    </div>\n  </nav>\n</template>"; });
-define('text!apiTests/apiTest.html', ['module'], function(module) { module.exports = "<template>\n    <section class=\"au-animate\">\n        <h1>Welcome to the api tests page</h1>\n\n        <label>Admin: ${isAdmin}</label>\n        <br />\n        <label>User Data:</label><span>${stringifiedUser}</span>\n        <br />\n        <label for=\"channels\">User Channels:</label>\n        <ul id=\"channels\">\n            <li repeat.for=\"channel of userChannels\">${channel.name}</li>\n        </ul>\n        <br />\n        <label for=\"groups\">User Groups:</label>\n        <ul id=\"groups\">\n            <li repeat.for=\"group of userGroups\">${group.name}</li>\n        </ul>\n    </section>\n</template>"; });
+define('text!admin/index.html', ['module'], function(module) { module.exports = "<template>\n    <section>\n        <h1>Welcome to the admin</h1>\n        <label>Admin: ${isAdmin}</label>\n    </section>\n</template>\n"; });
 define('text!apiTests/apiTests.html', ['module'], function(module) { module.exports = "<template>\n    <section class=\"au-animate\">\n        <h1>Welcome to the api tests page</h1>\n\n        <label>Admin: ${isAdmin}</label>\n        <br />\n        <label>User Data:</label><span>${stringifiedUser}</span>\n        <br />\n        <label for=\"channels\">User Channels:</label>\n        <ul id=\"channels\">\n            <li repeat.for=\"channel of userChannels\">${channel.name}</li>\n        </ul>\n        <br />\n        <label for=\"groups\">User Groups:</label>\n        <ul id=\"groups\">\n            <li repeat.for=\"group of userGroups\">${group.name}</li>\n        </ul>\n    </section>\n</template>"; });
+define('text!resources/elements/nav-bar.html', ['module'], function(module) { module.exports = "<template>\n  <nav class=\"navbar navbar-default navbar-fixed-top\" role=\"navigation\">\n    <div class=\"navbar-header\">\n      <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\"#skeleton-navigation-navbar-collapse\">\n        <span class=\"sr-only\">Toggle Navigation</span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n        <span class=\"icon-bar\"></span>\n      </button>\n      <a class=\"navbar-brand\" href=\"#\">\n        <i class=\"fa fa-home\"></i>\n        <span>${router.title}</span>\n      </a>\n    </div>\n\n    <div class=\"collapse navbar-collapse\" id=\"skeleton-navigation-navbar-collapse\">\n      <ul class=\"nav navbar-nav\">\n        <li repeat.for=\"row of router.navigation\" class=\"${row.isActive ? 'active' : ''}\">\n          <a data-toggle=\"collapse\" data-target=\"#skeleton-navigation-navbar-collapse.in\" href.bind=\"row.href\">${row.title}</a>\n        </li>\n      </ul>\n\n      <ul class=\"nav navbar-nav navbar-right\">\n        <li class=\"loader\" if.bind=\"router.isNavigating\">\n          <i class=\"fa fa-spinner fa-spin fa-2x\"></i>\n        </li>\n      </ul>\n    </div>\n  </nav>\n</template>"; });
 //# sourceMappingURL=app-bundle.js.map
