@@ -20,18 +20,24 @@ export class App {
 @inject(Api)
 class AuthorizeStep {
         constructor(api) {
-                this.admin = false
-                this.user = false
-                // TODO How can we force the app to wait here? That seems pretty important. 
-                api.get("ping").then(data => {
-                        this.admin = data.admin;
-                        this.user = true;
+                this.api = api
+        }
+        auth() {
+                if ( typeof this.authPromise == "undefined") {
+                        this.authPromise = this.api.get("ping")
+                }
+                return this.authPromise.then(data => {
+                       console.log("b")
+                       this.admin = data.admin
+                       this.user = true
+                       this.data = data
                 }).catch(err => {
-                        // Logged out or app down
+                       this.admin = false
+                       this.user = false
                 });
         }
-
         run(navigationInstruction, next) {
+            return this.auth().then(function() {
                 if ( navigationInstruction.getAllInstructions().some( i => i.config.settings.roles.indexOf( 'admin' ) !== -1 ) ) {
                         if ( !this.admin ) {
                                 return next.cancel( new Redirect( 'welcome' ) );
@@ -46,5 +52,6 @@ class AuthorizeStep {
                         }
                 }
                 return next();
+            }.bind(this));
         }
 }
