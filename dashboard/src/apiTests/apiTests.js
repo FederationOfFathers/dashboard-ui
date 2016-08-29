@@ -1,41 +1,26 @@
 import {inject} from 'aurelia-framework';
-import {UserApi} from 'api/user';
+import {UserCache} from 'cache/user';
 
-@inject(UserApi)
+@inject(UserCache)
 export class ApiTests{
-    constructor(userApi){
-        this.UserApi = userApi;
-
-        this.userProfile = {
-            admin: false,
-            channels: [],
-            groups: [],
-            user: {}
-        };
+    constructor(userCache){
+        this.userCache = userCache;
+        this.user = userCache.get();
     }
     activate(){
-        this.UserApi.ping().then(data => {
-            console.log(data);
-            //TODO: User lodash or equivelant to merge data with defaults
-            this.userProfile.admin = data.admin;
-            this.userProfile.channels = data.channels;
-            this.userProfile.groups = data.groups;
-            this.userProfile.user = data.user;
-        }).catch(err => {
-            console.error(err)
-        });
+        console.log(this.user);
     }
 
     get isAdmin(){
-        return this.userProfile.admin;
+        return this.user.admin;
     }
     get stringifiedUser(){
-        return JSON.stringify(this.userProfile.user);
+        return JSON.stringify(this.user.user);
     }
     get userChannels(){
-        return this.userProfile.channels;
+        return this.user.channels;
     }
     get userGroups(){
-        return this.userProfile.groups;
+        return this.user.groups;
     }
 }

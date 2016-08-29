@@ -116,7 +116,11 @@
           "aurelia-templating",
           "aurelia-templating-binding",
           "whatwg-fetch",
-          "jquery",
+          {
+            "name": "jquery",
+            "path": "../node_modules/jquery/dist/jquery.min",
+            "exports": "$"
+          },
           {
             "name": "bootstrap",
             "path": "../node_modules/bootstrap/dist",
