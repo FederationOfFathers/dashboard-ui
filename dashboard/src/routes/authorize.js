@@ -6,23 +6,24 @@ import {UserCache} from 'cache/user';
 export class AuthorizeStep {
     constructor(userCache) {
             this.userCache = userCache;
-            this.user = this.userCache.get();
     }
     get admin(){
-      return this.user ? this.user.admin : false;
+        let user = this.userCache.get();
+      return user ? user.admin : false;
     }
 
     run(navigationInstruction, next) {
+        let user = this.userCache.get();
       if ( navigationInstruction.getAllInstructions().some( i => i.config.settings.roles.indexOf( 'admin' ) !== -1 ) ) {
               if ( !this.admin ) {
                       return next.cancel( new Redirect( 'welcome' ) );
               }
       } else if ( navigationInstruction.getAllInstructions().some( i => i.config.settings.roles.indexOf( 'user' ) !== -1 ) ) {
-              if ( !this.user ) {
+              if ( !user ) {
                       return next.cancel( new Redirect( 'login' ) );
               }
       } else if ( navigationInstruction.getAllInstructions().some( i => i.config.settings.roles.indexOf( 'anonymous' ) !== -1 ) ) {
-              if ( this.user ) {
+              if ( user ) {
                       return next.cancel( new Redirect( 'welcome' ) );
               }
       }

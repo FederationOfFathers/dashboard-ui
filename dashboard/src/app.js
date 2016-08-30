@@ -9,35 +9,35 @@ import {AuthorizeStep} from 'routes/authorize';
 @inject(UserApi, UserCache, AuthorizeStep)
 export class App {
 
-  constructor(userApi, userCache, authorizeStep){
+  constructor(userApi, userCache, authorizeStep) {
     this.userApi = userApi;
     this.userCache = userCache;
     this.user;
     this._authorizeStep = authorizeStep;
 
-    this._userPing = window.setInterval(()=>{
+    this._userPing = window.setInterval(() => {
       this.getUserInfo();
     }, 60000); //Refresh user data every 60 seconds
   }
 
-  activate(){
+  activate() {
     return this.getUserInfo()
-      .then(()=>{
-          this.user = this.userCache.get();
+      .then(() => {
+        this.user = this.userCache.get();
       });
   }
-    
+
 
   configureRouter(config, router) {
-    configureMainRoutes(config,router, this.userCache, this._authorizeStep);
+    configureMainRoutes(config, router, this.userCache.get(), this._authorizeStep);
     this.router = router;
   }
 
-  getUserInfo(){
+  getUserInfo() {
     return this.userApi.ping().then(data => {
-            this.userCache.set(data);
-        }).catch(err => {
-            console.error(err)
-        });
+      this.userCache.set(data);
+    }).catch(err => {
+      console.error(err)
+    });
   }
 }
