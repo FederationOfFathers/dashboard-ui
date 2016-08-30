@@ -1,6 +1,6 @@
 export class UserCache{
     constructor(){
-        this.user = {}
+        this.user;
     }
 
     set(userInfo){
