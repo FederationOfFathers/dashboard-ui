@@ -6,6 +6,9 @@
         "type": "???",
         "url": "???"
     },
+    "scripts": {
+        "start": "au run --watch"
+    },
     "license": "MIT",
     "dependencies": {
         "aurelia-animator-css": "^1.0.0-rc.1.0.0",
