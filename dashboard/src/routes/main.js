@@ -32,6 +32,15 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
                 roles: ["user", "admin"]
             }
         }, {
+            route: 'admin/dics',
+            name: 'dics',
+            moduleId: 'admin/dics',
+            nav: admin,
+            title: "DiCS",
+            settings: {
+                roles: ["user", "admin"]
+            }
+        }, {
             route: 'login',
             name: 'login',
             moduleId: 'login',
