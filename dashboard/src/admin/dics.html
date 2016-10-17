@@ -1,0 +1,41 @@
+<template>
+        <section>
+                <h1>A Big Bag of DiCS for Meow</h1>
+        </section>
+        <section>
+                <table class="table table-striped">
+                        <thead>
+                                <tr>
+                                        <th>GamerTag</th>
+                                        <th>SlackID</th>
+                                        <th>LastSeen</th>
+                                        <th>kills</th>
+                                        <th>assists</th>
+                                        <th>wins</th>
+                                        <th>matches</th>
+                                        <th>seconds played</th>
+                                        <th>precision kills</th>
+                                        <th>grenade kills</th>
+                                        <th>deaths</th>
+                                        <th>score</th>
+                                </tr>
+                        </thead>
+                        <tbody>
+                                <tr repeat.for="[SlackID, user] of users">
+                                        <td>${user.XBL}</td>
+                                        <td>${user.SlackID}</td>
+                                        <td>${user.SeenTimestamp}</td>
+                                        <td>${user.kills}</td>
+                                        <td>${user.assists}</td>
+                                        <td>${user.wins}</td>
+                                        <td>${user.matches}</td>
+                                        <td>${user.seconds_played}</td>
+                                        <td>${user.precision_kills}</td>
+                                        <td>${user.grenade_kills}</td>
+                                        <td>${user.deaths}</td>
+                                        <td>${user.score}</td>
+                                </tr>
+                        </tbody>
+                </table>
+        </section>
+</template>
