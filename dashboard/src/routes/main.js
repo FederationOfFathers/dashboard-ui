@@ -41,6 +41,15 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
                 roles: ["user", "admin"]
             }
         }, {
+                route: 'groups',
+                name: 'groups',
+                moduleId: 'groups',
+                nav: true,
+                title: 'Public Groups',
+                settings: {
+                        roles: ["user", "admin"]
+                }
+        }, {
             route: 'login',
             name: 'login',
             moduleId: 'login',
@@ -49,6 +58,6 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             settings: {
                 roles: ["anonymous"]
             }
-        },
+        }
     ]);
 }

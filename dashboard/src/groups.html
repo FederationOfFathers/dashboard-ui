@@ -1,0 +1,35 @@
+<template>
+        <section>
+                <h1>Public Groups</h2>
+        </section>
+        <section>
+                <table>
+                        <thead>
+                                <tr>
+                                        <th>Name</th>
+                                        <!-- TODO: only admins see the visible column -->
+                                        <th show.bind="user.admin">Public</th>
+                                        <th>Action</th>
+                                </tr>
+                        </thead>
+                        <tr repeat.for="group of $this.public_groups">
+                                <td>${group.name}</td>
+                                <!-- TODO: visible column is an admin toggle with a HTTP POST -->
+                                <td show.bind="user.admin">
+                                        <a href="#" click.delegate="setVisible(group.id)" show.bind="group.visible === 'false'">
+                                        no
+                                        </a>
+                                        <a href="#" click.delegate="setHidden(group.id)" show.bind="group.visible === 'true'">
+                                        yes
+                                        </a>
+                                </td>
+                                <!-- TODO: join button becomes joined and disabled if already a member -->
+                                <!-- TODO: join disabled if not visible (admins) -->
+                                <td>
+                                        <button show.bind="false === group.member" click.delegate="join(group.id)">Join</button>
+                                        <span show.bind="group.member">member</span>
+                                </td>
+                        </tr>
+                </table>
+        </section>
+</template>
