@@ -2,6 +2,14 @@
 
 User Interface for the new dashboard project
 
+# TODO
+
+Explain how this fits with the dashboard repo
+
+# TODO
+
+Get bob to update the rest of this document
+
 # Pre-Requisite
 
 1. NodeJS (https://nodejs.org/) must be installed
