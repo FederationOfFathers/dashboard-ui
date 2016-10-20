@@ -4,11 +4,9 @@ User Interface for the new dashboard project
 
 # TODO
 
-Explain how this fits with the dashboard repo
-
-# TODO
-
-Get bob to update the rest of this document
+- [x] Complain about frameworks
+- [ ] Explain how this fits with the dashboard repo  
+- [ ] Get bob to update the rest of this document  
 
 # Pre-Requisite
 
