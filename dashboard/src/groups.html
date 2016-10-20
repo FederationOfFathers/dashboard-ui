@@ -8,7 +8,7 @@
                                 <tr>
                                         <th>Name</th>
                                         <!-- TODO: only admins see the visible column -->
-                                        <th show.bind="user.admin">Public</th>
+                                        <th show.bind="user.admin">Visibility</th>
                                         <th>Action</th>
                                 </tr>
                         </thead>
@@ -17,17 +17,19 @@
                                 <!-- TODO: visible column is an admin toggle with a HTTP POST -->
                                 <td show.bind="user.admin">
                                         <a href="#" click.delegate="setVisible(group.id)" show.bind="group.visible === 'false'">
-                                        no
+                                        Private
                                         </a>
                                         <a href="#" click.delegate="setHidden(group.id)" show.bind="group.visible === 'true'">
-                                        yes
+                                        Public
                                         </a>
                                 </td>
                                 <!-- TODO: join button becomes joined and disabled if already a member -->
                                 <!-- TODO: join disabled if not visible (admins) -->
                                 <td>
-                                        <button show.bind="false === group.member" click.delegate="join(group.id)">Join</button>
-                                        <span show.bind="group.member">member</span>
+                                        <span show.bind="'true' === group.visible || group.member">
+                                                <button show.bind="false === group.member" click.delegate="join(group.id)">Join</button>
+                                                <span show.bind="group.member">member</span>
+                                        </span>
                                 </td>
                         </tr>
                 </table>
