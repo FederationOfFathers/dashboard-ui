@@ -1,3 +1,7 @@
-dashboard/scripts/app-bundle.js
-dashboard/scripts/app-bundle.js.map
-dashboard/scripts/vendor-bundle.js
+node_modules
+jspm_packages
+.idea
+.DS_STORE
+scripts/app-bundle.js
+scripts/app-bundle.js.map
+scripts/vendor-bundle.js
