@@ -42,6 +42,7 @@
     "root": "src",
     "resources": "src/resources",
     "elements": "src/resources/elements",
+    "images": "src/resources/images",
     "attributes": "src/resources/attributes",
     "valueConverters": "src/resources/value-converters",
     "bindingBehaviors": "src/resources/binding-behaviors"
@@ -67,9 +68,10 @@
           "name": "text",
           "extensions": [
             ".html",
-            ".css"
+            ".css",
+            ".svg"
           ],
-          "stub": true
+          "stub": false
         }
       ]
     },
@@ -89,7 +91,7 @@
         "name": "vendor-bundle.js",
         "prepend": [
           "node_modules/bluebird/js/browser/bluebird.core.js",
-          "scripts/require.js"
+            "node_modules/requirejs/require.js"
         ],
         "dependencies": [
           "aurelia-animator-css",
@@ -116,6 +118,7 @@
           "aurelia-templating",
           "aurelia-templating-binding",
           "whatwg-fetch",
+          "text",
           {
             "name": "jquery",
             "path": "../node_modules/jquery/dist/jquery.min",
@@ -132,10 +135,6 @@
             ]
           },
           {
-            "name": "text",
-            "path": "../scripts/text"
-          },
-          {
             "name": "aurelia-templating-resources",
             "path": "../node_modules/aurelia-templating-resources/dist/amd",
             "main": "aurelia-templating-resources"
@@ -144,6 +143,11 @@
             "name": "aurelia-templating-router",
             "path": "../node_modules/aurelia-templating-router/dist/amd",
             "main": "aurelia-templating-router"
+          },
+          {
+            "name": "aurelia-ui-virtualization",
+            "path": "../node_modules/aurelia-ui-virtualization/dist/amd",
+            "main": "aurelia-ui-virtualization"
           },
           {
             "name": "aurelia-testing",

@@ -6,7 +6,7 @@ import {
 } from 'aurelia-fetch-client';
 
 @inject(HttpClient)
-export class dics {
+export class Dics {
     constructor(HttpClient) {
         this.http = HttpClient
         this.stat = {

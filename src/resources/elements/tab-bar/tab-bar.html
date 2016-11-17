@@ -1,0 +1,9 @@
+<template>
+  <require from="./tab-bar.css"></require>
+  <h1>tab bar</h1>
+  <ul>
+    <li repeat.for="route of router.navigation" class="${route.isActive ? 'active' : ''}">
+        <a href.bind="route.href">${route.title}</a>
+    </li>
+  </ul>
+</template>

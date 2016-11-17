@@ -1,0 +1,14 @@
+<template>
+    <require from="./team.css"></require>
+    <section class="page-team">
+        <section class="team-navigation ${atHome ? 'primary' : ''}">
+            Team tool
+            <ul>
+                <li repeat.for="route of router.navigation">
+                    <a href.bind="route.href">${route.title}</a>
+                </li>
+            </ul>
+        </section>
+        <router-view></router-view>
+    </section>
+</template>

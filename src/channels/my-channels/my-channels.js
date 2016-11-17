@@ -4,7 +4,7 @@ import {UserCache} from 'cache/user';
 
 
 @inject(UserCache)
-export class Groups {
+export class MyChannels {
 
     join(groupID) {
             fetch(

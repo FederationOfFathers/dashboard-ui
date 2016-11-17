@@ -1,0 +1,17 @@
+.page-team{
+    display: block;
+
+    .team-navigation {
+        display: none;
+        &.primary{
+            display: block;
+            ~ router-view {
+                display: none;
+            }
+        }
+    }
+    router-view{
+        .primary ~ {
+        }
+    }
+}

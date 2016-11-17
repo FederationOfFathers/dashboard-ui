@@ -3,17 +3,18 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
     config.title = 'FoF Dashboard';
     config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
-
+        {route: '', redirect: 'team'},
         {
-            route: ['', 'welcome'],
-            name: 'welcome',
-            moduleId: 'welcome',
+            route: ['team', 'team/*details'],
+            name: 'team',
+            moduleId: 'team/team',
             nav: true,
-            title: 'Welcome',
+            title: 'Team',
             settings: {
                 roles: ["user"]
             }
-        }, {
+        }, 
+        {
             route: 'apiTest',
             name: 'apiTest',
             moduleId: 'apiTests/apiTests',
@@ -22,8 +23,9 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             settings: {
                 roles: ["user"]
             }
-        }, {
-            route: 'admin',
+        }, 
+        {
+            route: ['admin'],
             name: 'admin',
             moduleId: 'admin/admin',
             nav: admin,
@@ -31,25 +33,28 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             settings: {
                 roles: ["user", "admin"]
             }
-        }, {
-            route: 'admin/dics',
-            name: 'dics',
-            moduleId: 'admin/dics',
-            nav: admin,
-            title: "DiCS",
-            settings: {
-                roles: ["user", "admin"]
-            }
-        }, {
-                route: 'groups',
-                name: 'groups',
-                moduleId: 'groups',
+        }, 
+        // {
+        //     route: 'admin/dics',
+        //     name: 'dics',
+        //     moduleId: 'admin/dics',
+        //     nav: admin,
+        //     title: "DiCS",
+        //     settings: {
+        //         roles: ["user", "admin"]
+        //     }
+        // }, 
+        {
+                route: ['channels', 'channels/*details'],
+                name: 'channels',
+                moduleId: 'channels/my-channels/my-channels',
                 nav: true,
-                title: 'Public Groups',
+                title: 'Channels',
                 settings: {
                         roles: ["user", "admin"]
                 }
-        }, {
+        }, 
+        {
             route: 'login',
             name: 'login',
             moduleId: 'login',
@@ -61,3 +66,4 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
         }
     ]);
 }
+

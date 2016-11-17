@@ -264,9 +264,9 @@ aurelia-bootstrapper@^1.0.0:
     aurelia-templating-resources "^1.0.0"
     aurelia-templating-router "^1.0.0"
 
-aurelia-cli@^0.21.0:
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/aurelia-cli/-/aurelia-cli-0.21.0.tgz#4c3a64fbc5758114a19c31161475a5eb46663e08"
+aurelia-cli@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/aurelia-cli/-/aurelia-cli-0.22.0.tgz#abf70827bd1d582ffd80aee54585d808368ddad0"
   dependencies:
     aurelia-dependency-injection "^1.0.0"
     aurelia-polyfills "^1.0.0"
@@ -451,6 +451,20 @@ aurelia-tools@^0.2.2:
   dependencies:
     breeze-dag "^0.1.0"
     through2 "^2.0.0"
+
+aurelia-ui-virtualization:
+  version "1.0.0-beta.3.0.1"
+  resolved "https://registry.yarnpkg.com/aurelia-ui-virtualization/-/aurelia-ui-virtualization-1.0.0-beta.3.0.1.tgz#c4ea962ec80bc802bbd9f82b916f07d563a79a7a"
+  dependencies:
+    aurelia-binding "^1.0.0"
+    aurelia-dependency-injection "^1.0.0"
+    aurelia-framework "^1.0.0"
+    aurelia-logging "^1.0.0"
+    aurelia-logging-console "^1.0.0"
+    aurelia-path "^1.0.0"
+    aurelia-task-queue "^1.0.0"
+    aurelia-templating "^1.0.0"
+    aurelia-templating-resources "^1.0.0"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
@@ -1666,7 +1680,7 @@ defaults@^1.0.3:
   dependencies:
     clone "^1.0.2"
 
-del@^2.0.2:
+del, del@^2.0.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/del/-/del-2.2.2.tgz#c12c981d067846c84bcaf862cff930d907ffd1a8"
   dependencies:
@@ -4512,6 +4526,10 @@ require-uncached@^1.0.2:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
 
+requirejs@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/requirejs/-/requirejs-2.3.2.tgz#0eaa870d4c7db3b15dd1322e6b65b0388fc4b2c6"
+
 requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
@@ -4941,6 +4959,10 @@ tar@^2.0.0, tar@~2.2.0, tar@~2.2.1:
 text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
+
+"text@github:requirejs/text#latest":
+  version "2.0.15"
+  resolved "https://codeload.github.com/requirejs/text/tar.gz/d04de4ffd7bf5ba6cb80cdca2d40d4f6f52a1b1f"
 
 tfunk@^3.0.1:
   version "3.0.2"
