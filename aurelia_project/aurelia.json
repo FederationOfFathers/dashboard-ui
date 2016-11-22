@@ -29,6 +29,12 @@
     "fileExtension": ".scss",
     "source": "src/**/*.scss"
   },
+  "svgProcessor": {
+    "id": "svg",
+    "displayName": "SVG",
+    "fileExtension": ".svg",
+    "source": "src/**/*.svg"
+  },
   "editor": {
     "id": "vscode",
     "displayName": "Visual Studio Code"
@@ -84,14 +90,15 @@
         "name": "app-bundle.js",
         "source": [
           "[**/*.js]",
-          "**/*.{css,html}"
+          "**/*.{css,html}",
+          "**/*.svg"
         ]
       },
       {
         "name": "vendor-bundle.js",
         "prepend": [
           "node_modules/bluebird/js/browser/bluebird.core.js",
-            "node_modules/requirejs/require.js"
+          "node_modules/requirejs/require.js"
         ],
         "dependencies": [
           "aurelia-animator-css",

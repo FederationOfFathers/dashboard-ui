@@ -8,20 +8,22 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             route: ['team', 'team/*details'],
             name: 'team',
             moduleId: 'team/team',
-            nav: true,
+            nav: false,
             title: 'Team',
             settings: {
-                roles: ["user"]
+                roles: ["user"],
+                icon: 'resources/images/svg/Channel' 
             }
         }, 
         {
             route: 'apiTest',
             name: 'apiTest',
             moduleId: 'apiTests/apiTests',
-            nav: true,
+            nav: false,
             title: 'API Tests',
             settings: {
-                roles: ["user"]
+                roles: ["user"],
+                icon: 'resources/images/svg/Channel'
             }
         }, 
         {
@@ -31,7 +33,8 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             nav: admin,
             title: "Admin",
             settings: {
-                roles: ["user", "admin"]
+                roles: ["user", "admin"],
+                icon: 'resources/images/svg/Admin'
             }
         }, 
         // {
@@ -45,14 +48,15 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
         //     }
         // }, 
         {
-                route: ['channels', 'channels/*details'],
-                name: 'channels',
-                moduleId: 'channels/my-channels/my-channels',
-                nav: true,
-                title: 'Channels',
-                settings: {
-                        roles: ["user", "admin"]
-                }
+            route: ['channels', 'channels/*details'],
+            name: 'channels',
+            moduleId: 'channels/my-channels/my-channels',
+            nav: true,
+            title: 'Channels',
+            settings: {
+                    roles: ["user", "admin"],
+                    icon: 'resources/images/svg/Channel'
+            }
         }, 
         {
             route: 'login',

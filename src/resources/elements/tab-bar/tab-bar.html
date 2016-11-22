@@ -3,7 +3,7 @@
   <ul>
     <li repeat.for="route of router.navigation" class="${route.isActive ? 'active' : ''}">
         <a href.bind="route.href">
-          <inline-svg svg="resources/images/svg/chevron"></inline-svg>
+          <inline-svg svg="${route.settings.icon}"></inline-svg>
           <div class="route-title">${route.title}</div>
         </a>
     </li>
