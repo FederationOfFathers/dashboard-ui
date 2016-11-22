@@ -1,4 +1,5 @@
 import {inject} from 'aurelia-framework';
+// import {AureliaUX} from 'aurelia-ux';
 
 import {UserApi} from 'api/user';
 import {UserCache} from 'cache/user';
@@ -6,10 +7,13 @@ import {UserCache} from 'cache/user';
 import configureMainRoutes from 'routes/main';
 import {AuthorizeStep} from 'routes/authorize';
 
+// import {configureDesign} from './design';
+
 @inject(UserApi, UserCache, AuthorizeStep)
 export class App {
 
   constructor(userApi, userCache, authorizeStep) {
+
     this.userApi = userApi;
     this.userCache = userCache;
     this.user;

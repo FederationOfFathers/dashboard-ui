@@ -1,11 +1,13 @@
 <template>
   <require from="./tab-bar.css"></require>
-  <ul>
-    <li repeat.for="route of router.navigation" class="${route.isActive ? 'active' : ''}">
-        <a href.bind="route.href">
-          <inline-svg svg="${route.settings.icon}"></inline-svg>
-          <div class="route-title">${route.title}</div>
-        </a>
-    </li>
-  </ul>
+  <nav>
+    <ul>
+      <li repeat.for="route of router.navigation" class="${route.isActive ? 'active' : ''}">
+          <a href.bind="route.href">
+            <inline-svg svg="${route.settings.icon}"></inline-svg>
+            <div class="route-title">${route.title}</div>
+          </a>
+      </li>
+    </ul>
+  </nav>
 </template>

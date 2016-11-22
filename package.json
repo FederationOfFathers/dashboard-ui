@@ -15,6 +15,7 @@
     "aurelia-bootstrapper": "^1.0.0",
     "aurelia-fetch-client": "^1.0.0",
     "aurelia-ui-virtualization": "^1.0.0-beta.3.0.1",
+    "aurelia-ux": "^0.1.14",
     "bluebird": "^3.4.1",
     "bootstrap": "^3.3.7",
     "jquery": "^3.1.0",
