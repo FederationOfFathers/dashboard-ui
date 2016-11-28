@@ -3,7 +3,7 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
     config.title = 'FoF Dashboard';
     config.addPipelineStep('authorize', AuthorizeStep);
     config.map([
-        {route: '', redirect: 'channels'},
+        {route: '', redirect: 'channels'}, 
         {
             route: ['team', 'team/*details'],
             name: 'team',

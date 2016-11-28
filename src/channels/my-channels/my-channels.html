@@ -1,38 +1,37 @@
 <template>
         <require from="./my-channels.css"></require>
+        <navigation-bar title="My Channels" ></navigation-bar>
         <section class="page-myChannels">
-                <section>
-                        <h1>Public Groups</h2>
-                </section>
-                <table>
+                <sorted-list items.bind="channels"></sorted-list>
+                <!--<table>
                         <thead>
                                 <tr>
                                         <th>Name</th>
                                         <!-- TODO: only admins see the visible column -->
-                                        <th show.bind="user.admin">Visibility</th>
+                                        <!--<th show.bind="user.admin">Visibility</th>
                                         <th>Action</th>
                                 </tr>
                         </thead>
-                        <tr repeat.for="group of $this.public_groups">
-                                <td>${group.name}</td>
+                        <tr repeat.for="channel of channels">
+                                <td>${channel.name}</td>-->
                                 <!-- TODO: visible column is an admin toggle with a HTTP POST -->
-                                <td show.bind="user.admin">
-                                        <a href="#" click.delegate="setVisible(group.id)" show.bind="group.visible === 'false'">
+                                <!--<td show.bind="user.admin">
+                                        <a href="#" click.delegate="setVisible(channel.id)" show.bind="channel.visible === 'false'">
                                         Private
                                         </a>
-                                        <a href="#" click.delegate="setHidden(group.id)" show.bind="group.visible === 'true'">
+                                        <a href="#" click.delegate="setHidden(channel.id)" show.bind="channel.visible === 'true'">
                                         Public
                                         </a>
-                                </td>
+                                </td>-->
                                 <!-- TODO: join button becomes joined and disabled if already a member -->
                                 <!-- TODO: join disabled if not visible (admins) -->
-                                <td>
-                                        <span show.bind="'true' === group.visible || group.member">
-                                                <button show.bind="false === group.member" click.delegate="join(group.id)">Join</button>
-                                                <span show.bind="group.member">member</span>
+                                <!--<td>
+                                        <span show.bind="'true' === channel.visible || channel.member">
+                                                <button show.bind="false === channel.member" click.delegate="join(channel.id)">Join</button>
+                                                <span show.bind="channel.member">member</span>
                                         </span>
                                 </td>
                         </tr>
-                </table>
+                </table>-->
         </section>
 </template>

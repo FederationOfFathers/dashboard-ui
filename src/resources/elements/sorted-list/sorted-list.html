@@ -1,0 +1,15 @@
+<template>
+    <require from="./sorted-list.css"></require>
+    <ul class="sorted-list">
+        <li repeat.for="group of groups" >
+            <div class="group-header">
+                <span>${group.name}</span>
+            </div>
+            <ul class="items">
+                <li class="item" repeat.for="item of group.items">
+                    <h5>${item.name}</h6>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</template>

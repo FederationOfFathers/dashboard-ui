@@ -1,3 +1,15 @@
 .page-myChannels{
+    position: absolute; 
+    top: 0;
+    left:0;
+    right:0;
+    bottom: 49px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 40px;
+    overflow: auto;
 
+    sorted-list{
+        height: 100%;
+    }
 }

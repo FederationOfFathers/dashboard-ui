@@ -1,12 +1,15 @@
 export class UserCache{
     constructor(){
-        this.user;
+        this._user;
     }
 
     set(userInfo){
-        this.user = userInfo;
+        this._user = userInfo;
     }
     get(){
-        return this.user;
+        return this._user;
+    }
+    get myChannels(){
+        return this._user.groups
     }
 }
