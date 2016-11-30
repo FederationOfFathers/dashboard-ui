@@ -13,7 +13,7 @@ export class GroupsApi {
     join(id){
         return this.api.get("groups/${id}/join");
     }
-    visibility(id){
-        return this.api.put("groups/${id}/visibility");
+    visibility(id, visibility){
+        return this.api.put(`groups/${id}/visibility`, {visible: visibility});
     }
 }

@@ -1,0 +1,12 @@
+<template>
+        <require from="./all-channels.css"></require>
+        <navigation-bar title="All Channels" back.bind="back"></navigation-bar>
+        <section class="page-allChannels">
+                <!--<search-bar query.bind="query"></search-bar>-->
+                <sorted-list items.bind="channels">
+                        <template replace-part="item">
+                                <a click.trigger="modifyChannel(item)" href="#/channels/${item.id}">${item.name}</a>
+                        </template>
+                </sorted-list>
+        </section>
+</template>

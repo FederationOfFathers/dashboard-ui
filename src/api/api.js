@@ -26,7 +26,7 @@ export class Api {
                     response(response) {
                         console.log(`Intercepted response ${response.status} using URL: ${response.url}`);
                         if (response.status > 299 || response.status < 200){
-                            throw Error('Logged out: response ${response.status}');
+                            throw Error(`Logged out: response ${response.status}`);
                         }
                         return response;
                     }
@@ -41,7 +41,7 @@ export class Api {
                 return response.json()
             })
     }
-    put(url, payload){       
+    put(url, payload, responseType = 'text'){       
         //TODO: Test to make sure this works. Not tested yet
         var data = new FormData();
         data.append( "json", JSON.stringify( payload ) );
@@ -51,7 +51,12 @@ export class Api {
                 body: data
             })
             .then(response => {
-                return response.json()
+                switch(responseType.toLowerCase()){
+                    case 'json': 
+                        return response.json();
+                    default: 
+                        return response.text();
+                }
             })
     }
     post(){

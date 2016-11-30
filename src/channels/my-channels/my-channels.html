@@ -1,8 +1,12 @@
 <template>
         <require from="./my-channels.css"></require>
-        <navigation-bar title="My Channels" ></navigation-bar>
+        <navigation-bar title="My Channels" more.bind="more"></navigation-bar>
         <section class="page-myChannels">
-                <sorted-list items.bind="channels"></sorted-list>
+                <sorted-list items.bind="channels">
+                        <template replace-part="item">
+                                <a click.trigger="modifyChannel(item)" href="#/channels/${item.id}">${item.name}</a>
+                        </template>
+                </sorted-list>
                 <!--<table>
                         <thead>
                                 <tr>

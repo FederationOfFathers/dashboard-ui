@@ -1,0 +1,13 @@
+<template>
+  <ai-dialog>
+    <ai-dialog-body>
+      <h4>${title}</h4>
+      <p innerhtml.bind="body"></p>
+    </ai-dialog-body>
+    <ai-dialog-footer>
+      <button click.trigger="controller.cancel()">Cancel</button>
+      <button click.trigger="controller.ok(details)">${details.confirm}</button>
+      <button if.bind="details.admin" click.trigger="controller.ok('modify')">Modify</button>
+    </ai-dialog-footer>
+  </ai-dialog>
+</template>

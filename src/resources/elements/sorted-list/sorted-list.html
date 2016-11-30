@@ -7,7 +7,9 @@
             </div>
             <ul class="items">
                 <li class="item" repeat.for="item of group.items">
-                    <h5>${item.name}</h6>
+                    <a replaceable part="item" href="#" >
+                        <h5>${item.name}</h5>
+                    </a>
                 </li>
             </ul>
         </li>

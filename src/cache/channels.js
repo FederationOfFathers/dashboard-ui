@@ -7,7 +7,10 @@ export class ChannelCache{
     constructor(userCache){
         this._userCache = userCache;
         this._channels = [];
-        this._myChannels = [];
+    }
+
+    getById(id){
+        return this.channels.find(channel => channel.id == id);
     }
 
     set channels (channels){
@@ -17,13 +20,15 @@ export class ChannelCache{
         }
         this._channels.sort((a, b) => {
             return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-        })
-        console.log(this._channels);
+        });
+        //TODO: ASAP: Create a channel model to use to unify channel/group object structure
+         console.log(this._channels);
+         console.log(this._userCache.myChannels);
     }
     get channels(){
         return this._channels;
     }
     get myChannels(){
-        return this._channels;
+        return this._userCache.myChannels;
     }
 }

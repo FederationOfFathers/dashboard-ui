@@ -50,14 +50,14 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
         {
             route: ['channels', 'channels/*details'],
             name: 'channels',
-            moduleId: 'channels/my-channels/my-channels',
+            moduleId: 'channels/channels',
             nav: true,
             title: 'Channels',
             settings: {
                     roles: ["user", "admin"],
                     icon: 'resources/images/svg/Channel'
             }
-        }, 
+        },
         {
             route: 'login',
             name: 'login',

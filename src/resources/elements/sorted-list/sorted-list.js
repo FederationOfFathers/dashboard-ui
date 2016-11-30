@@ -8,7 +8,7 @@ export class SortedList {
   }
 
   itemsChanged(){
-      console.log('changed');
+    //   console.log('changed');
       this.groups = this.groupByFirstChar(this.items);
   }
 

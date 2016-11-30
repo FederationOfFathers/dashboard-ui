@@ -2,16 +2,22 @@
   <require from="./navigation-bar.css"></require>
   <header>
     <div class="back">
-      <a href.bind="back.href">
-        <inline-svg svg="resources/images/svg/chevron"></inline-svg>
-        <span>${back.title}</span>
-      </a>
+      <slot name="back">
+        <a if.bind="back" href.bind="back.href">
+          <inline-svg svg="resources/images/svg/chevron"></inline-svg>
+          <span>${back.title}</span>
+        </a>
+      </slot>
     </div>
     <div class="title">
-      <h4>${title}</h4>
+      <slot name="title">
+        <h4>${title}</h4>
+      </slot>
     </div>
-    <div class="more" if.bind="more">
-      <a href.bind="more.href">${more.title}</a>
+    <div class="more" >
+      <slot name="more">
+        <a if.bind="more" href.bind="more.href">${more.title}</a>
+      </slot>
     </div>
   </header>
 </template>

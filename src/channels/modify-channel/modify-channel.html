@@ -1,0 +1,21 @@
+<template>
+        <require from="./modify-channel.css"></require>
+        <navigation-bar title="Modify Channel" >
+            <div slot="back">
+                <a href="#" click.trigger="back()">
+                    <inline-svg svg="resources/images/svg/chevron"></inline-svg>
+                    <span>Back</span>
+                </a>
+            </div>
+        </navigation-bar>
+        <section class="page-modifyChannel ${busy ? 'busy' : ''}">
+                <article>
+                    <label>Channel Name</label>
+                    <div>${channel.name}</div>
+                </article>
+                <article>
+                    <label>Hidden</label>
+                    <switch value.bind="hidden"></switch>
+                </article>
+        </section>
+</template>
