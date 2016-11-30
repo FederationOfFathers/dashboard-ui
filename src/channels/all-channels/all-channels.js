@@ -31,6 +31,16 @@ export class AllChannels {
         //         })
     }
 
+     joinChannel(id) {
+             return this._groupsApi.join(id)
+                .then(response => {
+                        this._channelCache.update();//TODO: Don't think this is needed...
+                })
+                .catch(err => {
+                        console.error(err)
+                });
+    }
+
     modifyChannel(channel){
         //TODO: if Admin, then show channel controls
         console.log(channel);
@@ -45,10 +55,15 @@ export class AllChannels {
                 console.log(response);
                 if (!response.wasCancelled) {
                         console.log('good - ', response.output);
-                        if(response.output == 'modify'){
-                                //let routerParams = this.router.routes.find(x => x.name === 'modifyChannel');
-                                //routerParams.data = channel;
-                                this._router.navigateToRoute(`modifyChannel`, {id: channel.id, originator: '#/channels/allChannels', data: channel});   
+                        switch(response.output){
+                                case "modify":
+                                        //let routerParams = this.router.routes.find(x => x.name === 'modifyChannel');
+                                        //routerParams.data = channel;
+                                        this._router.navigateToRoute(`modifyChannel`, {id: channel.id, originator: '#/channels/allChannels', data: channel});   
+                                        break;
+                                case "join":
+                                        this.joinChannel(channel.id);
+                                        break;
                         }
                 } else {
                         console.log('bad');

@@ -1,16 +1,24 @@
 import {inject} from 'aurelia-framework';
 
 import {UserCache} from 'cache/user';
+import {GroupsApi} from 'api/groups';
 
-@inject(UserCache)
+@inject(UserCache, GroupsApi)
 export class ChannelCache{
-    constructor(userCache){
+    constructor(userCache, groupsApi){
         this._userCache = userCache;
+        this._groupsApi = groupsApi;
         this._channels = [];
     }
 
     getById(id){
         return this.channels.find(channel => channel.id == id);
+    }
+    update(){
+        return this._groupsApi.get()
+                .then(channels => {
+                        this.channels = channels;
+                })
     }
 
     set channels (channels){

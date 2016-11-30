@@ -35,10 +35,17 @@ export class Api {
         this.http = http;
     }
 
-    get(url){
+    get(url, responseType = 'json'){
         return this.http.fetch(url)
             .then(response => {
-                return response.json()
+                 switch(responseType.toLowerCase()){
+                    case 'json': 
+                        return response.json();
+                    case 'text': 
+                        return response.text();
+                    default: 
+                        return response.json();
+                }
             })
     }
     put(url, payload, responseType = 'text'){       
