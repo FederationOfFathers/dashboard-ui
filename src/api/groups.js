@@ -14,6 +14,6 @@ export class GroupsApi {
         return this.api.get(`groups/${id}/join`, 'text');
     }
     visibility(id, visibility){
-        return this.api.put(`groups/${id}/visibility`, {visible: visibility});
+        return this.api.put(`groups/${id}/visibility`, {visible: visibility.toString()});
     }
 }

@@ -43,7 +43,7 @@ export class ModifyChannel{
                 })
                 .catch(err => {
                     this.busy = false;
-                    console.log(err);
+                    console.error(err);
                     this.channel.visible = originalValue;
                 });
         }

@@ -50,12 +50,15 @@ export class Api {
     }
     put(url, payload, responseType = 'text'){       
         //TODO: Test to make sure this works. Not tested yet
-        var data = new FormData();
-        data.append( "json", JSON.stringify( payload ) );
+        // var data = new FormData();
+        // data.append( "json", JSON.stringify( payload ) );
         return this.http.fetch(url,
             {
                 method: "put",
-                body: data
+                body: JSON.stringify(payload),
+                headers: {
+                    'Content-type': 'application/json'
+                }
             })
             .then(response => {
                 switch(responseType.toLowerCase()){
