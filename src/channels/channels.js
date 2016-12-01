@@ -16,10 +16,7 @@ export class Channels {
 
     activate(){
         //TODO: improve this so it's not a blocking action
-        return this._groupsApi.get()
-                .then(channels => {
-                        this.channels = channels;
-                })
+        return this._channelCache.update();
     }
 
     configureRouter(config, router) {
@@ -59,12 +56,4 @@ export class Channels {
             }
         ]);
     }
-
-    get channels(){
-            return this._channelCache.myChannels;
-    }
-    set channels(channels){
-            return this._channelCache.channels = channels;
-    }
-
 }

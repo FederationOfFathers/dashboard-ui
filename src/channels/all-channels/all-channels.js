@@ -79,8 +79,5 @@ export class AllChannels {
     get channels(){
             return this._channelCache.channels;
     }
-    set channels(channels){
-            return this._channelCache.channels = channels;
-    }
 
 }

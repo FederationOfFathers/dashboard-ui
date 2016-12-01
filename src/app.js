@@ -15,8 +15,7 @@ export class App {
   constructor(userApi, userCache, authorizeStep) {
 
     this.userApi = userApi;
-    this.userCache = userCache;
-    this.user;
+    this._userCache = userCache;
     this._authorizeStep = authorizeStep;
 
     this._userPing = window.setInterval(() => {
@@ -25,23 +24,20 @@ export class App {
   }
 
   activate() {
-    return this.getUserInfo()
-      .then(() => {
-        this.user = this.userCache.get();
-      });
+    return this.getUserInfo();
   }
 
 
   configureRouter(config, router) {
-    configureMainRoutes(config, router, this.userCache.get(), this._authorizeStep);
+    configureMainRoutes(config, router, this._userCache.get(), this._authorizeStep);
     this.router = router;
   }
 
   getUserInfo() {
-    return this.userApi.ping().then(data => {
-      this.userCache.set(data);
-    }).catch(err => {
-      console.error(err)
-    });
+    return this._userCache.update()    
+  }
+
+  get user(){
+    return this._userCache.get();
   }
 }

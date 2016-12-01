@@ -129,8 +129,5 @@ export class MyChannels {
     get channels(){
             return this._channelCache.myChannels;
     }
-    set channels(channels){
-            return this._channelCache.channels = channels;
-    }
 
 }

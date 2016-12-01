@@ -2,12 +2,14 @@ import {inject} from 'aurelia-framework';
 
 import {UserCache} from 'cache/user';
 import {GroupsApi} from 'api/groups';
+import {ChannelsApi} from 'api/channels';
 
-@inject(UserCache, GroupsApi)
+@inject(UserCache, GroupsApi, ChannelsApi)
 export class ChannelCache{
-    constructor(userCache, groupsApi){
+    constructor(userCache, groupsApi, channelsApi){
         this._userCache = userCache;
         this._groupsApi = groupsApi;
+        this._channelsApi = channelsApi;
         this._channels = [];
     }
 
@@ -15,10 +17,13 @@ export class ChannelCache{
         return this.channels.find(channel => channel.id == id);
     }
     update(){
-        return this._groupsApi.get()
-                .then(channels => {
-                        this.channels = channels;
-                })
+        return Promise.all([this._groupsApi.get(),this._channelsApi.get()])
+                .then(values => {
+                        this.channels = Object.assign(values[0], values[1]);
+                        //this.channels = this.channels.push(...values[1]);
+                        console.log(values);
+                        console.log(this.channels.map(c => c.name));
+                });
     }
 
     set channels (channels){
@@ -30,8 +35,6 @@ export class ChannelCache{
             return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
         });
         //TODO: ASAP: Create a channel model to use to unify channel/group object structure
-         console.log(this._channels);
-         console.log(this._userCache.myChannels);
     }
     get channels(){
         return this._channels;
