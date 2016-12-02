@@ -30,21 +30,21 @@ export class ModifyChannel{
     }
 
     get hidden() {
-        return this.channel.visible;
+        return this.channel.visible == "false";
     }
-    set hidden(val){
+    set hidden(isHidden){
         if(!this.busy){
-            let originalValue = this.channel.visible;
-            this.channel.visible = val;
+            let originalVisibleValue = this.channel.visible;
+            this.channel.visible = (!isHidden).toString();
             this.busy = true;
-            this._groupsApi.visibility(this.channel.id, val)
+            this._groupsApi.visibility(this.channel.id, !isHidden)
                 .then(result => {
                     this.busy = false;
                 })
                 .catch(err => {
                     this.busy = false;
                     console.error(err);
-                    this.channel.visible = originalValue;
+                    this.channel.visible = originalVisibleValue;
                 });
         }
     }
