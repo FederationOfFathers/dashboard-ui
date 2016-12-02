@@ -20,7 +20,7 @@ export class UserCache{
 
     set(userInfo){
         this._user = userInfo;
-        this._myChannels = this._user.groups.concat(this._user.channels).sort((a, b) => {
+        this._myChannels = this._user.groups.map(g => {g.type = "Group"; return g}).concat(this._user.channels.map(c => {c.type = "Channel"; return c})).sort((a, b) => {
             return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
         });
     }

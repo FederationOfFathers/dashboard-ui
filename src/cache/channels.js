@@ -19,8 +19,15 @@ export class ChannelCache{
     update(){
         return Promise.all([this._groupsApi.get(),this._channelsApi.get()])
                 .then(values => {
+                        for(let group in values[0]){
+                            values[0][group].type = 'Group';
+                        }
+                        for(let channel in values[1]){
+                            values[1][channel].type = 'Channel';
+                        }
                         this.channels = Object.assign(values[0], values[1]);
                         //this.channels = this.channels.push(...values[1]);
+                        console.log(this.channels);
                         console.log(values);
                         console.log(this.channels.map(c => c.name));
                 });

@@ -55,7 +55,7 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             title: 'Channels',
             settings: {
                     roles: ["user", "admin"],
-                    icon: 'resources/images/svg/Channel'
+                    icon: 'resources/images/svg/Channels'
             }
         },
         {

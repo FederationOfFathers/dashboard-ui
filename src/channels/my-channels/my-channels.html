@@ -4,7 +4,12 @@
         <section class="page-myChannels">
                 <sorted-list items.bind="channels">
                         <template replace-part="item">
-                                <a click.trigger="modifyChannel(item)" href="#/channels/${item.id}">${item.name}</a>
+                                <a click.trigger="modifyChannel(item)" href="#/channels/${item.id}">
+                                        <div class="icon">
+                                                <inline-svg svg="resources/images/svg/${item.type}" ></inline-svg>
+                                        </div>
+                                        <div class="title">${item.name}</div>
+                                </a>
                         </template>
                 </sorted-list>
                 <!--<table>

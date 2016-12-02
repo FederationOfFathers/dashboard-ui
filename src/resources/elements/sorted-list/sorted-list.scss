@@ -19,7 +19,7 @@ sorted-list{
     }
     .item{
         padding: 0;
-        margin-left: 15px;
+        margin-left: 5px;
         height: 48px;
         cursor: pointer;
 
@@ -30,6 +30,7 @@ sorted-list{
             line-height: 48px;
             color: inherit;
             text-decoration: none;
+            position: relative;
             &:hover{
                 text-decoration: none;
             }
@@ -37,6 +38,22 @@ sorted-list{
 
         &:not(:last-child){
             border-bottom: 1px solid rgb(229, 229, 229);
+        }
+        .icon {
+            display: inline-block;
+            height: 100%;
+            width: 3rem;
+            padding: 5px;
+            svg {
+                height: 100%;
+                width: 100%;
+            }
+        }
+        .title {
+            display: inline-block;
+            position: absolute;
+            line-height: 48px;
+            left: 3rem;
         }
     }
 }
