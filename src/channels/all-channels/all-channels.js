@@ -59,7 +59,7 @@ export class AllChannels {
                                 case "modify":
                                         //let routerParams = this.router.routes.find(x => x.name === 'modifyChannel');
                                         //routerParams.data = channel;
-                                        this._router.navigateToRoute(`modifyChannel`, {id: channel.id, originator: '#/channels/allChannels', data: channel});   
+                                        this._router.navigate(`${channel.id}`);  
                                         break;
                                 case "join":
                                         this.joinChannel(channel.id);
