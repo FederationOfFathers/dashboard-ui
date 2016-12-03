@@ -55,5 +55,14 @@ sorted-list{
             line-height: 48px;
             left: 3rem;
         }
+        .subtitle{
+            position: absolute;
+            top: 32px;
+            left: 4rem;
+            line-height: 1rem;
+            color: rgb(175, 175, 175);
+            font-size: smaller;
+            font-style: italic;
+        }
     }
 }

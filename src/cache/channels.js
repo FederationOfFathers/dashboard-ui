@@ -19,11 +19,19 @@ export class ChannelCache{
     update(){
         return Promise.all([this._groupsApi.get(),this._channelsApi.get()])
                 .then(values => {
-                        for(let group in values[0]){
-                            values[0][group].type = 'Group';
+                        for(let groupId in values[0]){
+                            let group = values[0][groupId]
+                            group.type = 'Group';
+                            if (this._userCache.user.groups.findIndex(g=> g.id == group.id) > -1){
+                                group.member = true;
+                            }
                         }
-                        for(let channel in values[1]){
-                            values[1][channel].type = 'Channel';
+                        for(let channelId in values[1]){
+                            let channel = values[1][channelId]
+                            channel.type = 'Channel';
+                            if (this._userCache.user.channels.findIndex(c=> c.id == channel.id) > -1){
+                                channel.member = true;
+                            }
                         }
                         this.channels = Object.assign(values[0], values[1]);
                         //this.channels = this.channels.push(...values[1]);

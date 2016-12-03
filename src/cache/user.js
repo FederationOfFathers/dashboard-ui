@@ -25,6 +25,10 @@ export class UserCache{
         });
     }
     get(){
+        //TODO: phase this call out
+        return this._user;
+    }
+    get user(){
         return this._user;
     }
     get myChannels(){
