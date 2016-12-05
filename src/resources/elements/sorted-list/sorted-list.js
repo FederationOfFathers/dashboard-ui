@@ -1,14 +1,19 @@
-import {bindable} from 'aurelia-framework';
+import {BindingEngine, inject, bindable} from 'aurelia-framework';
 
+@inject(BindingEngine)
 export class SortedList {
   @bindable items;
 
-  constructor(){
+  constructor(bindingEngine){
+      this.bindingEngine = bindingEngine;
       this.groups = [];
+
+        
   }
 
-  itemsChanged(){
-    //   console.log('changed');
+  itemsChanged(splices){
+    console.log('changed');
+    //console.log(this.items);
       this.groups = this.groupByFirstChar(this.items);
   }
 
@@ -23,12 +28,26 @@ export class SortedList {
               mappedList.set(firstChar, [list[i]]);
           }
       }
+      mappedList.forEach((value, key, map) => {
+          value.sort((a, b) => {
+            return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+        });
+      });
       return Array.from(mappedList, item => {
           return {
               name: item[0],
               items: item[1]
           }
-      });
+      }).sort((a, b) => {
+            return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+        });
+  }
+  bind(){
+      this.subscription = this.bindingEngine.collectionObserver(this.items).subscribe((splices)=>this.itemsChanged(splices));
+      this.itemsChanged();
+  }
+  detached(){
+      this.subscription.dispose();
   }
   
 }

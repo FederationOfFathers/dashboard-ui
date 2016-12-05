@@ -22,7 +22,7 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             nav: false,
             title: 'API Tests',
             settings: {
-                roles: ["user"],
+                roles: ["user", "admin"],
                 icon: 'resources/images/svg/Channel'
             }
         }, 
@@ -54,7 +54,7 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             nav: true,
             title: 'Channels',
             settings: {
-                    roles: ["user", "admin"],
+                    roles: ["user"],
                     icon: 'resources/images/svg/Channels'
             }
         },

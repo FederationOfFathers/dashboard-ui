@@ -3,4 +3,9 @@
         height: 100%;
         overflow: auto;
     }
+    .right {
+        > * {
+            display: inline-block;
+        }
+    }
 }

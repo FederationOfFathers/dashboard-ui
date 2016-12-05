@@ -5,12 +5,18 @@
                 <!--<search-bar query.bind="query"></search-bar>-->
                 <sorted-list items.bind="channels">
                         <template replace-part="item">
-                                <a click.trigger="modifyChannel(item)" href="#/channels/${item.id}">
+                                <a click.delegate="modifyChannel(item)" href="#/channels/${item.id}">
                                         <div class="icon">
                                                 <inline-svg svg="resources/images/svg/${item.type}" ></inline-svg>
                                         </div>
                                         <div class="title">${item.name}</div>
-                                        <div class="subtitle">${item.member ? '(member)' : ''}</div>
+                                        <div class="subtitle">${item.visible == "true" ? '' : '(hidden)'}</div>
+                                        <div class="right">
+                                                <button class='f-btn' click.trigger="toggleChannelState(item, $event)">${item.member ? 'Leave' : 'Join'}</button>
+                                                <!--<div class="more">
+                                                        <inline-svg svg="resources/images/svg/More" ></inline-svg>
+                                                </div>-->
+                                        </div>
                                 </a>
                         </template>
                 </sorted-list>

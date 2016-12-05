@@ -13,4 +13,7 @@ export class ChannelsApi {
     join(id){
         return this.api.get(`channels/${id}/join`, 'text');
     }
+    leave(id){
+        return this.api.get(`channels/${id}/leave`, 'text');
+    }
 }

@@ -7,7 +7,8 @@ export class UserCache{
     constructor(userApi){
         this._userApi = userApi;
         this._user;
-        this._myChannels;
+        this.myChannels;
+
     }
 
     update(){
@@ -20,18 +21,16 @@ export class UserCache{
 
     set(userInfo){
         this._user = userInfo;
-        this._myChannels = this._user.groups.map(g => {g.type = "Group"; return g}).concat(this._user.channels.map(c => {c.type = "Channel"; return c})).sort((a, b) => {
+        this.myChannels = this._user.groups.map(g => {g.type = "Group"; return g}).concat(this._user.channels.map(c => {c.type = "Channel"; return c})).sort((a, b) => {
             return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-        });
+        });        
+
     }
     get(){
         //TODO: phase this call out
         return this._user;
     }
     get user(){
-        return this._user;
-    }
-    get myChannels(){
-        return this._myChannels;
+        return this._user ? this._user.user : {};
     }
 }

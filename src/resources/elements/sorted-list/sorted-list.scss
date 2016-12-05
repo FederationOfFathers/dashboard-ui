@@ -54,6 +54,10 @@ sorted-list{
             position: absolute;
             line-height: 48px;
             left: 3rem;
+            right: 6rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         .subtitle{
             position: absolute;
@@ -63,6 +67,14 @@ sorted-list{
             color: rgb(175, 175, 175);
             font-size: smaller;
             font-style: italic;
+        }
+        .right {
+            position: absolute;
+            right: 0;
+            top: 0;
+            line-height: 48px;
+            width: 6rem;
+            text-align: right;
         }
     }
 }

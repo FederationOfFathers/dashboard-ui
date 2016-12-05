@@ -1,0 +1,12 @@
+@import './variables';
+
+.f-btn{
+    border: none;
+    background-color: transparent;
+    color: $action;
+    padding: 0 6px;
+
+    &:hover{
+        color: red;
+    }
+}
