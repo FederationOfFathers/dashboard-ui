@@ -12,7 +12,7 @@ export class SortedList {
   }
 
   itemsChanged(splices){
-    console.log('changed');
+    //console.log('changed');
     //console.log(this.items);
       this.groups = this.groupByFirstChar(this.items);
   }

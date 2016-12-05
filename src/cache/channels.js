@@ -37,9 +37,9 @@ export class ChannelCache{
                         }
                         this.channels = Object.assign(values[0], values[1]);
                         //this.channels = this.channels.push(...values[1]);
-                        console.log(this.channels);
-                        console.log(values);
-                        console.log(this.channels.map(c => c.name));
+                        // console.log(this.channels);
+                        // console.log(values);
+                        // console.log(this.channels.map(c => c.name));
                         return this.channels;
                 });
     }

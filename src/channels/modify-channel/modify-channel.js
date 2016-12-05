@@ -26,7 +26,13 @@ export class ModifyChannel{
     }
 
     back(){
-        this._router.navigateBack();
+        try {
+            this._router.navigateBack();
+        } catch(err){
+            //Most likely refreshed page and we don't have a "back" to go to
+            console.log(err);
+            this._router.navigateTo('channels');
+        }
     }
 
     get hidden() {
