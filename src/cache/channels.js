@@ -31,7 +31,7 @@ export class ChannelCache{
                         for(let channelId in values[1]){
                             let channel = values[1][channelId]
                             channel.type = 'Channel';
-                            if (channel.members.indexOf(this._userCache.user.name)){
+                            if (channel.members.indexOf(this._userCache.user.name) > -1){
                                 channel.member = true;
                             }
                         }
