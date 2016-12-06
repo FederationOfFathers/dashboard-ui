@@ -1,3 +1,5 @@
+@import '../../sass/variables';
+
 .page-modifyChannel{
     // position: absolute; 
     // top: 0;
@@ -8,5 +10,42 @@
     // margin-right: 0;
     // padding-top: 40px;
     // overflow: auto;
+    article {
+        margin-bottom: 25px;
+    }
+    article > label {
+        padding: 15px 15px 0;
+        font-weight: normal;
+    }
+    .text-container {
+        width: 100%;
+        line-height: 40px;
+        padding: 0 20px;
+        background-color: white;
+        border-top: 1px solid $border-gray;
+        border-bottom: 1px solid $border-gray;
 
+        &.expanded {
+            line-height: 50px;
+            position: relative;
+            label{
+                top: -8px;
+                position: relative;
+                line-height: 30px;
+            }
+            switch {
+                position: absolute;
+                display: inline-block;
+                right: 15px;
+            }
+            p {
+                position: absolute;
+                bottom: 0;
+                line-height: 25px;
+                margin: 0;
+                color: gray;
+                font-size: small;
+            }
+        }
+    }
 }
