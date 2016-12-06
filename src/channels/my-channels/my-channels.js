@@ -39,7 +39,7 @@ export class MyChannels {
                         body: `Are you sure you want to leave the channel <mark>${channel.name}</mark>?`,
                         confirm: 'Leave',
                         channel: channel,
-                        admin: this.user.admin
+                        modify: (this.user.admin && channel.type == "Group")
                 };
                 this.dialogService.open({ viewModel: ChannelActionPrompt, model: details}).then(response => {
                         console.log(response);

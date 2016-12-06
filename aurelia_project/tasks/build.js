@@ -8,7 +8,6 @@ import {build} from 'aurelia-cli';
 import project from '../aurelia.json';
 
 export default gulp.series(
-  clean,
   readProjectConfiguration,
   gulp.parallel(
     transpile,
