@@ -3,14 +3,16 @@ import {Router} from 'aurelia-router';
 
 import {GroupsApi} from 'api/groups';
 import {ChannelCache} from 'cache/channels';
+import {UserCache} from 'cache/user';
 
-@inject(Router, GroupsApi, ChannelCache)
+@inject(Router, GroupsApi, ChannelCache, UserCache)
 export class ModifyChannel{
 
-    constructor(router, groupsApi, channelCache){
+    constructor(router, groupsApi, channelCache, userCache){
         this._router = router;
         this._groupsApi = groupsApi;
         this._channelCache = channelCache;
+        this._userCache = userCache;
         this.busy = false;
 
         
@@ -53,6 +55,9 @@ export class ModifyChannel{
                     this.channel.visible = originalVisibleValue;
                 });
         }
+    }
+    get canChangeVisibility(){
+        return this.channel.type == "Group" && this._userCache.get().admin;
     }
 }
 

@@ -35,7 +35,7 @@ export class ChannelCache{
                                 channel.member = true;
                             }
                         }
-                        this.channels = Object.assign(values[0], values[1]);
+                        this.channels = Object.assign({}, values[0], values[1]);
                         //this.channels = this.channels.push(...values[1]);
                         // console.log(this.channels);
                         // console.log(values);
@@ -47,7 +47,9 @@ export class ChannelCache{
     set channels (channels){
         this._channels = [];
         for (let key in channels){
-            if (!this._userCache.get().admin ? channels[key].visible == "true" : true){
+            //Admins can see everything
+            //Members can see their own channels
+            if ((!this._userCache.get().admin ? channels[key].visible == "true" : true) || channels[key].member){
                 this._channels.push(channels[key]);
             }
         }

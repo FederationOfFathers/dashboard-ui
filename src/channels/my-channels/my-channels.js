@@ -34,28 +34,28 @@ export class MyChannels {
         modifyChannel(channel){
                 //TODO: if Admin, then show channel controls
                 console.log(channel);
-                let details = { 
-                        title: 'Leave Channel', 
-                        body: `Are you sure you want to leave the channel <mark>${channel.name}</mark>?`,
-                        confirm: 'Leave',
-                        channel: channel,
-                        modify: (this.user.admin && channel.type == "Group")
-                };
-                this.dialogService.open({ viewModel: ChannelActionPrompt, model: details}).then(response => {
-                        console.log(response);
-                        if (!response.wasCancelled) {
-                                console.log('good - ', response.output);
-                                if(response.output == 'modify'){
-                                        //let routerParams = this.router.routes.find(x => x.name === 'modifyChannel');
-                                        //routerParams.data = channel;
-                                        this._router.navigate(`${channel.id}`);   
-                                }
-                        } else {
-                                console.log('bad');
-                        }
-                        console.log(response.output);
-                });
-                return false;
+                // let details = { 
+                //         title: 'Leave Channel', 
+                //         body: `Are you sure you want to leave the channel <mark>${channel.name}</mark>?`,
+                //         confirm: 'Leave',
+                //         channel: channel,
+                //         modify: (this.user.admin && channel.type == "Group")
+                // };
+                // this.dialogService.open({ viewModel: ChannelActionPrompt, model: details}).then(response => {
+                //         console.log(response);
+                //         if (!response.wasCancelled) {
+                //                 console.log('good - ', response.output);
+                //                 if(response.output == 'modify'){
+                //                         //let routerParams = this.router.routes.find(x => x.name === 'modifyChannel');
+                //                         //routerParams.data = channel;
+                //                         this._router.navigate(`${channel.id}`);   
+                //                 }
+                //         } else {
+                //                 console.log('bad');
+                //         }
+                //         console.log(response.output);
+                // });
+                return true;
         }
   
         leaveChannel(channel){
