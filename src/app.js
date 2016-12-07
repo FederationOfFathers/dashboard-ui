@@ -24,7 +24,13 @@ export class App {
   }
 
   activate() {
-    return this.getUserInfo();
+    return this.getUserInfo()
+      .catch(err => {
+                let response = err.message.split(":")[1].trim();
+                if(response == "401"){
+                    window.location.href="#login";//this.router.navigate('#/login')
+                }
+            });
   }
 
 
