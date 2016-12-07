@@ -22,7 +22,7 @@ export class MyChannels {
                 this._channels = this._channelCache.myChannels;
                 this.query = "";
                 this.more = {
-                        title: 'More',
+                        title: 'All',
                         href: '#/channels/allChannels'
                 }
         }
