@@ -7,7 +7,7 @@
     <ai-dialog-footer>
       <button click.trigger="controller.cancel()">Cancel</button>
       <button click.trigger="controller.ok('confirm')">${details.confirm}</button>
-      <button if.bind="details.admin" click.trigger="controller.ok('modify')">Modify</button>
+      <button if.bind="details.modify" click.trigger="controller.ok('modify')">Modify</button>
     </ai-dialog-footer>
   </ai-dialog>
 </template>

@@ -11,11 +11,20 @@
         <section class="page-modifyChannel ${busy ? 'busy' : ''}">
                 <article>
                     <label>Channel Name</label>
-                    <div>${channel.name}</div>
+                    <div class="text-container">${channel.name}</div>
+                </article>
+                <article if.bind="canChangeVisibility">
+                    <div class="text-container expanded">
+                        <label>Hidden</label>
+                        <switch value.bind="hidden"></switch>
+                        <p>Only direct invites and admins can view</p>
+                    </div>
                 </article>
                 <article>
-                    <label>Hidden</label>
-                    <switch value.bind="hidden"></switch>
+                    <div class="text-container expanded">
+                        <label>Stats</label>                        
+                        <p>Coming Soon</p>
+                    </div>
                 </article>
         </section>
 </template>

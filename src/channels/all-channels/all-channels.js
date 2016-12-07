@@ -30,17 +30,28 @@ export class AllChannels {
         }
 
         joinChannel(channel) {
+                let request;
+                let prevState = channel.member;
                 channel.member = true;
-                return this._groupsApi.join(channel.id)
-                .then(response => {
+
+                if(channel.type == 'Group'){
+                        request = this._groupsApi.join(channel.id);
+                } else if (channel.type == 'Channel'){
+                        request = this._channelsApi.join(channel.id);
+                }
+
+                return request.then(response => {
                         this._userCache.myChannels.push(channel);
                 })
                 .catch(err => {
+                        channel.member = prevState;
                         console.error(err)
                 });
         }
         leaveChannel(channel){
                 let request;
+                let prevState = channel.member;
+
                 if(channel.type == 'Group'){
                         request = this._groupsApi.leave(channel.id);
                 } else if (channel.type == 'Channel'){
@@ -52,6 +63,7 @@ export class AllChannels {
                         //this._channelCache.update()//TODO: Don't think this is needed...
                 })
                 .catch(err => {
+                        channel.member = prevState;
                         console.error(err)
                 });
         }

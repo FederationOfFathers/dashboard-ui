@@ -31,11 +31,11 @@ export class ChannelCache{
                         for(let channelId in values[1]){
                             let channel = values[1][channelId]
                             channel.type = 'Channel';
-                            if (channel.members.indexOf(this._userCache.user.name)){
+                            if (channel.members.indexOf(this._userCache.user.name) > -1){
                                 channel.member = true;
                             }
                         }
-                        this.channels = Object.assign(values[0], values[1]);
+                        this.channels = Object.assign({}, values[0], values[1]);
                         //this.channels = this.channels.push(...values[1]);
                         // console.log(this.channels);
                         // console.log(values);
@@ -47,7 +47,9 @@ export class ChannelCache{
     set channels (channels){
         this._channels = [];
         for (let key in channels){
-            if (!this._userCache.get().admin ? channels[key].visible == "true" : true){
+            //Admins can see everything
+            //Members can see their own channels
+            if ((!this._userCache.get().admin ? channels[key].visible == "true" : true) || channels[key].member){
                 this._channels.push(channels[key]);
             }
         }
