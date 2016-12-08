@@ -11,8 +11,8 @@ switch {
         border: none;
         border-radius: 20px;
         box-shadow: 0px 0px 0px 1px #e5e5e5;
-        height: 40px;
-        width: 70px;
+        height: 35px;
+        width: 65px;
         background-color: white;
         padding: 0;
         cursor: pointer;
@@ -32,7 +32,7 @@ switch {
         left: 0;
         top: 0;
         bottom: 0;
-        width: 37px;
+        width: 33px;
         margin: 0 -1px;
         background-color: white;
         border: 1px solid #e5e5e5;
@@ -42,7 +42,7 @@ switch {
         transition: left .1s ease-in-out, border-color .1s ease-in-out;
     }
     .switch-container.on .indicator{
-        left: calc(100% - 37px);
+        left: calc(100% - 33px);
         border-color: #00b300;
     }
 }

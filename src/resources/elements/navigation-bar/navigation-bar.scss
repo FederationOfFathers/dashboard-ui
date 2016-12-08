@@ -37,8 +37,8 @@ navigation-bar {
         }
         svg {
             position: absolute;
-            top: 18px;
-            height: 20px;
+            padding: 3px;
+            height: 100%;
             width: 20px;
             fill: $action;
         }
