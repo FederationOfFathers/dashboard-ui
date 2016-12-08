@@ -1,10 +1,12 @@
+@import '../../../sass/variables';
+
 tab-bar{
     display: block;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 49px;
+    height: $tab-bar-height;
     border-top: 1px solid rgb(229, 229, 229);
 
     -webkit-backdrop-filter: blur(2px);
@@ -31,7 +33,7 @@ tab-bar{
         }
         
         a {
-            height: 100%;
+            height: $tab-bar-height;
             width: 100%;
             position: absolute;
             display: block;
@@ -44,8 +46,7 @@ tab-bar{
             }
 
             svg {
-                height: 24px;
-                width: 24px;
+                height: calc(100% - 20px);
                 display: block;
                 margin-left: auto;
                 margin-right: auto;

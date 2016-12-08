@@ -1,12 +1,10 @@
 <template>
         <require from="./modify-channel.css"></require>
         <navigation-bar title="Modify Channel" >
-            <div slot="back">
-                <a href="#" click.trigger="back()">
-                    <inline-svg svg="resources/images/svg/Chevron"></inline-svg>
-                    <span>Back</span>
-                </a>
-            </div>
+            <a slot="back" href="#" click.trigger="back()">
+                <inline-svg svg="resources/images/svg/Chevron"></inline-svg>
+                <span>Back</span>
+            </a>
         </navigation-bar>
         <section class="page-modifyChannel ${busy ? 'busy' : ''}">
                 <article>
@@ -17,7 +15,7 @@
                     <div class="text-container expanded">
                         <label>Hidden</label>
                         <switch value.bind="hidden"></switch>
-                        <p>Only direct invites and admins can view</p>
+                        <p>Only direct invites/admins can view</p>
                     </div>
                 </article>
                 <article>

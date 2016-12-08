@@ -1,13 +1,15 @@
+@import '../../../sass/variables';
+
 navigation-bar {
     display: block;
     position: absolute;
     top:0;
     left:0;
     right:0 ;
-    height:40px;
+    height:$navigation-bar-height;
     border-bottom: 1px solid rgb(229, 229, 229);
     z-index: 9999;
-
+    font-size: 17px;
     -webkit-backdrop-filter: blur(2px);
     background-color: rgba(255, 255, 255, 0.95);
 
@@ -18,21 +20,27 @@ navigation-bar {
     .back {
         display: inline-block;
         height: 100%;
-        padding: 5px;
         a {
             display: block;
-            height: 100%;
-            padding: 5px 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            line-height: $navigation-bar-height;
+
+            padding: 0 10px;
             text-decoration: none;
             span {
                 vertical-align: top;
                 margin-left: 20px;
+                line-height: $navigation-bar-height;
             }
         }
         svg {
             position: absolute;
+            top: 18px;
             height: 20px;
             width: 20px;
+            fill: $action;
         }
     }
     .title {
@@ -42,22 +50,29 @@ navigation-bar {
         left: 0;
         right: 0;
         top: 0;
+        bottom: 0;
         padding: 0 60px;
         z-index: -1;
         h4 {
             font-size:18px;
             font-weight: normal;
             text-align: center;
+            margin: 0;
+            line-height: $navigation-bar-height;
         }        
     }
     .more {
         position: absolute;
         right: 0;
         top: 0;
-        padding: 0 8px;
+        padding: 0 10px;
         text-align: right;
-        a {
-            line-height: 40px;
+        width: 60px;
+
+        a { 
+            display: block;
+            width: 100%;
+            line-height: $navigation-bar-height;
         }
     }
 }
