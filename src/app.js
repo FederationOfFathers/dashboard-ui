@@ -24,6 +24,7 @@ export class App {
   }
 
   activate() {
+    
     return this.getUserInfo()
       .catch(err => {
                 let response = err.message.split(":")[1].trim();

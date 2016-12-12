@@ -15,6 +15,29 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
                 icon: 'resources/images/svg/Channel' 
             }
         }, 
+        { //This is temporary until Team Tool gets integrated with Dashboard
+            route: ['team-tool'],
+            // redirect: 'http://team.fofgaming.com',
+            name: 'team-tool',
+            moduleId: 'team/tool/tool',
+            nav: true,
+            title: 'Team Tool',
+            settings: {
+                roles: ["user"],
+                icon: 'resources/images/svg/FoF', 
+            }
+        }, 
+        { //This will temporarily be a main navigation. Later to be nested inside team
+            route: ['racing-stats', 'racing-stats/*details'],
+            name: 'racing-stats',
+            moduleId: 'team/stats/stats',
+            nav: false,
+            title: 'Racing Stats',
+            settings: {
+                roles: ["user"],
+                icon: 'resources/images/svg/Channel' 
+            }
+        }, 
         {
             route: 'apiTest',
             name: 'apiTest',
