@@ -37,15 +37,15 @@ export class ModifyChannel{
         }
     }
 
-    get hidden() {
-        return this.channel.visible == "false";
+    get visible() {
+        return this.channel.visible == "true";
     }
-    set hidden(isHidden){
+    set visible(isVisible){
         if(!this.busy){
             let originalVisibleValue = this.channel.visible;
-            this.channel.visible = (!isHidden).toString();
+            this.channel.visible = (isVisible).toString();
             this.busy = true;
-            this._groupsApi.visibility(this.channel.id, !isHidden)
+            this._groupsApi.visibility(this.channel.id, isVisible)
                 .then(result => {
                     this.busy = false;
                 })
