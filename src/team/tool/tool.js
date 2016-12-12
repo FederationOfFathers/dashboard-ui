@@ -8,11 +8,11 @@ export class TeamTool {
     }
     activate(){
         //Sneaky way of finding out if we are navigating back to this same location
-        if(window.location.href.indexOf('navigated') > -1){
-            this._router.navigate('channels');
-        } else {
-            window.location.href += "/navigated";
-            window.location = "http://team.fofgaming.com";
-        }
+        // if(window.location.href.indexOf('navigated') > -1){
+        //     this._router.navigate('channels');
+        // } else {
+        //     window.location.href += "/navigated";
+        //     window.location = "http://team.fofgaming.com";
+        // }
     }
 }
