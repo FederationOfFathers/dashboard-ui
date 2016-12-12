@@ -28,7 +28,7 @@ section[class^="page-"], section[class*=" page-"]{
     margin-right: 0;
     padding-top: $navigation-bar-height;
     overflow: auto;
-
+    -webkit-overflow-scrolling: touch;
 }
 
 .busy {
