@@ -1,0 +1,14 @@
+section.page-racing {
+    // padding-top: 0;
+    background-color: white;
+    .track-select{
+        padding: 8px;
+        label {
+            font-weight: 500;
+        }
+        select {
+            width: calc(100% - 42px);
+            height: 30px;
+        }
+    }
+}

@@ -30,12 +30,12 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
         { //This will temporarily be a main navigation. Later to be nested inside team
             route: ['racing-stats', 'racing-stats/*details'],
             name: 'racing-stats',
-            moduleId: 'team/stats/stats',
-            nav: false,
-            title: 'Racing Stats',
+            moduleId: 'team/stats/racing/racing',
+            nav: true,
+            title: 'SRL (Beta)',
             settings: {
                 roles: ["user"],
-                icon: 'resources/images/svg/Channel' 
+                icon: 'resources/images/svg/SRL'  
             }
         }, 
         {

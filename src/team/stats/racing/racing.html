@@ -1,0 +1,28 @@
+<template>
+    <require from="./racing.css"></require>
+    <navigation-bar title="Racing Stats"></navigation-bar>
+    <section class="page-racing">
+        
+        <div class="track-select">
+            <label for="track">Track</label>
+            <select id="track" value.bind="selectedTrack">
+                <option repeat.for="track of tracks" value.bind="track.name">${track.name}</option>
+            </select>
+        </div>
+
+        <sorted-list items.bind="racers">
+            <template replace-part="item">
+                    <div>
+                            <div class="icon">
+                                    <!--<inline-svg svg="resources/images/svg/${item.type}" ></inline-svg>-->
+                            </div>
+                            <div class="title">${item.name}</div>
+                            <!--<div class="subtitle">${item.visible == "true" ? '' : '(hidden)'}</div>-->
+                            <div class="right">
+                                ${item.time}
+                            </div>
+                    </div>
+            </template>
+        </sorted-list>
+    </section>
+</template>
