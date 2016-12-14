@@ -1,0 +1,13 @@
+section.page-rosterList {
+    padding-top: 0;
+    padding-bottom: 0;
+    bottom: 58px;
+    
+    iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: none;
+        -webkit-overflow-scrolling: touch;
+    }
+}

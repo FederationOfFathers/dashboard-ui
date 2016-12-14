@@ -21,9 +21,20 @@ export class UserCache{
 
     set(userInfo){
         this._user = userInfo;
-        this.myChannels = this._user.groups.map(g => {g.type = "Group"; return g}).concat(this._user.channels.map(c => {c.type = "Channel"; return c})).sort((a, b) => {
-            return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-        });        
+        this.myChannels = this._user.groups
+            .map(g => {
+                g.type = "Group"; 
+                g.visible = g.visible ? g.visible.toString() : "false";
+                return g;
+            })
+            .concat(this._user.channels.map(c => {
+                c.type = "Channel"; 
+                c.visible = "true"; //All channels are open
+                return c;
+            }))
+            .sort((a, b) => {
+                return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+            });        
 
     }
     get(){
