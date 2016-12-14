@@ -26,6 +26,17 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
                 roles: ["user"],
                 icon: 'resources/images/svg/FoF', 
             }
+        },
+        { //This is temporary until the roster list gets integrated with Dashboard
+            route: ['roster-list'],
+            name: 'roster-list',
+            moduleId: 'team/roster/roster',
+            nav: true,
+            title: 'Roster List',
+            settings: {
+                roles: ["user"],
+                icon: 'resources/images/svg/Roster',
+            }
         }, 
         { //This will temporarily be a main navigation. Later to be nested inside team
             route: ['racing-stats', 'racing-stats/*details'],
