@@ -64,7 +64,7 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             route: ['admin'],
             name: 'admin',
             moduleId: 'admin/admin',
-            nav: admin,
+            nav: false,
             title: "Admin",
             settings: {
                 roles: ["user", "admin"],
