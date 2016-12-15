@@ -1,3 +1,16 @@
+@import '../../../sass/variables';
+
 search-bar {
-    
+    display: block;
+
+    .search-container {
+        padding: 5px 10px;
+        background-color:$element-background-gray;
+        input {
+            width: 100%;
+            border-radius: 3px;
+            border: 1px solid $border-gray;
+            padding: 3px;
+        }
+    }
 }

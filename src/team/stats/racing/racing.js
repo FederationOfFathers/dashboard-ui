@@ -13,6 +13,8 @@ export class RacingStats {
         this.tracks = [];   
         this._racers = [];    
 
+        this.query = "";
+
     }
 
     activate() {
@@ -25,10 +27,12 @@ export class RacingStats {
     
     }
 
-    @computedFrom('selectedTrack')
+    @computedFrom('selectedTrack', 'query')
     get racers(){
         return this._racers
-            .filter(r => r.track === this.selectedTrack)
+            .filter(r => {
+                return r.track === this.selectedTrack && r.name.toLowerCase().indexOf(this.query.toLowerCase()) > -1
+            })
             .sort((a, b) => parseInt(a.time) < parseInt(b.time) ? -1 : 1);
     }
 

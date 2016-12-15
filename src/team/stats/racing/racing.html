@@ -10,6 +10,8 @@
             </select>
         </div>
 
+        <search-bar query.bind="query & debounce"></search-bar>
+
         <sorted-list items.bind="racers">
             <template replace-part="item">
                     <div>
