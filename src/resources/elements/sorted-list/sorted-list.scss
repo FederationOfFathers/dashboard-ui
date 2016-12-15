@@ -1,3 +1,6 @@
+@import '../../../sass/variables';
+
+
 sorted-list{
     display: block;
     background-color: #fff;
@@ -7,7 +10,7 @@ sorted-list{
         list-style: none;
     }
     .group-header{
-        background-color: rgb(242, 242, 242);
+        background-color: $header-background-gray;
         padding: 2px 15px;
         font-weight: 500;
     }

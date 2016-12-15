@@ -1,5 +1,4 @@
 import environment from './environment';
-import 'jquery';
 import 'bootstrap';
 
 //Configure Bluebird Promises.

@@ -6,9 +6,11 @@
         <div class="track-select">
             <label for="track">Track</label>
             <select id="track" value.bind="selectedTrack">
-                <option repeat.for="track of tracks" value.bind="track.name">${track.name}</option>
+                <option repeat.for="track of tracks" value.bind="track">${track}</option>
             </select>
         </div>
+
+        <search-bar query.bind="query & debounce"></search-bar>
 
         <sorted-list items.bind="racers">
             <template replace-part="item">
@@ -19,7 +21,7 @@
                             <div class="title">${item.name}</div>
                             <!--<div class="subtitle">${item.visible == "true" ? '' : '(hidden)'}</div>-->
                             <div class="right">
-                                ${item.time}
+                                ${item.time | secondsFormat}
                             </div>
                     </div>
             </template>

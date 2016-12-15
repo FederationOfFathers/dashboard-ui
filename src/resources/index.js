@@ -5,6 +5,7 @@ export function configure(config) {
     'resources/elements/inline-svg/inline-svg',
     'resources/elements/sorted-list/sorted-list',
     'resources/elements/search-bar/search-bar',
-    'resources/elements/switch/switch'
+    'resources/elements/switch/switch',
+    'resources/value-converters/seconds-format'
   ]);
 }
