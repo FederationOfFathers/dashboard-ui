@@ -1,10 +1,17 @@
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
 
+import environment from 'environment';
+
 @inject(Router)
 export class TeamTool {
     constructor(router){
         this._router = router;
+        if(environment.debug){
+            this.teamToolLocation = "http://fofgaming.com:8867/api/v0/redirect/team-tool";
+        } else {
+            this.teamToolLocation = "/api/v0/redirect/team-tool";
+        }
     }
     activate(){
         //Sneaky way of finding out if we are navigating back to this same location
