@@ -1,14 +1,17 @@
 import {inject} from 'aurelia-framework';
 import {StatsApi} from 'api/stats';
 
+import {UsersCache} from 'cache/users';
+
 const STAT_NAMES = { //TODO: move this to some external file
     'srl' : [130006,130007,130008,130009]
 }
 
-@inject(StatsApi)
+@inject(StatsApi, UsersCache)
 export class StatsMagic {
-    constructor(statsApi){
+    constructor(statsApi, usersCache){
         this._statsApi = statsApi;
+        this._usersCache = usersCache;
         this.categories = new Map();
         this.destinyStatCategories = [];
         this.destinyStats;
@@ -16,14 +19,17 @@ export class StatsMagic {
 
     initialize(){
         this.categories = new Map();
-        return this._statsApi.getCategories()
-            .then(c => {
-                for(let category of c){
-                    this.categories.set(category.ID, category);
-                }
-                this.destinyStatCategories = this.getStatSummaryByProduct('destiny');
-                return this.getAllDestinyStats();
-            })
+        return this._usersCache.initialize()
+            .then(() => {
+                return this._statsApi.getCategories()
+                    .then(c => {
+                        for(let category of c){
+                            this.categories.set(category.ID, category);
+                        }
+                        this.destinyStatCategories = this.getStatSummaryByProduct('destiny');
+                        return this.getAllDestinyStats();
+                    });
+            });
     }
 
     getStatSummaryByProduct(product){
@@ -47,6 +53,7 @@ export class StatsMagic {
             .then(stats =>{
                 this.transformStats(stats);
                 this.destinyStats = stats;
+                console.log(stats);
                 return this.destinyStats;
             })
     }
@@ -59,9 +66,9 @@ export class StatsMagic {
                 case 'srl':
                     let srlStatIDs = STAT_NAMES.srl;
                     for(let i = 0; i < srlStatIDs.length; i++){
-                        let stat = userStat[srlStatIDs[i]];
+                        let stat = userStat.stats[srlStatIDs[i]];
                         if(stat){
-                            result.push(Object.assign({UserID: userID}, stat));
+                            result.push(Object.assign({UserID: userID, User: this._usersCache.users.get(userID)}, stat));
                         }
                     }
                     break;
@@ -77,12 +84,16 @@ export class StatsMagic {
 
     transformStats(stats){
         for(let userID in stats){
-            let userStat = stats[userID];
+            let userStat = stats[userID];            
             for(let stat in userStat){
                 let statValue = userStat[stat];
                 let prettyStatName = Object.assign({Value: statValue}, this.categories.get(parseInt(stat)));
                 userStat[stat] = prettyStatName;
             }
+            stats[userID] = {
+                user: this._usersCache.users.get(userID),
+                stats: userStat
+            };
         }
     }
 }

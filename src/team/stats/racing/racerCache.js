@@ -25,7 +25,7 @@ export class RacerCache {
         for(let i = 0; i < this._raceStats.length; i++){
             let stat = this._raceStats[i];
             let racingStat = {
-                    name: stat.UserID,
+                    name: stat.User.GamerTag,
                     track: stat.Sub3,
                     time: stat.Value,
                     description: 'SRL: Best Completion Time'    
