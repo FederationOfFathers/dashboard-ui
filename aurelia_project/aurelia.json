@@ -100,7 +100,8 @@
         "name": "vendor-bundle.js",
         "prepend": [
           "node_modules/bluebird/js/browser/bluebird.core.js",
-          "node_modules/requirejs/require.js"
+          "node_modules/requirejs/require.js",
+          "node_modules/jquery/dist/jquery.min.js"
         ],
         "dependencies": [
           "aurelia-animator-css",
@@ -129,16 +130,9 @@
           "whatwg-fetch",
           "text",
           {
-            "name": "jquery",
-            "path": "../node_modules/jquery/dist/jquery.min",
-            "exports": "$"
-          },
-          {
             "name": "bootstrap",
             "path": "../node_modules/bootstrap/dist",
             "main": "js/bootstrap.min",
-            "deps": ["jquery"],
-            "exports": "$",
             "resources": [
               "css/bootstrap.css"
             ]
