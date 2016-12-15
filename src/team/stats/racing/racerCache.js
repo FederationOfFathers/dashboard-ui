@@ -22,7 +22,7 @@ export class RacerCache {
         let racers = new Map();
         let result = [];
         this._raceStats = this._statsMagic.getStatByStatName('srl');
-        for(let i = 0; i < this._raceStats.length; i ++){
+        for(let i = 0; i < this._raceStats.length; i++){
             let stat = this._raceStats[i];
             let racingStat = {
                     name: stat.UserID,
@@ -36,8 +36,8 @@ export class RacerCache {
                 racers.set(stat.UserID, [racingStat]);
             }
         }
-        racers.forEach(([v,k])=>{
-            result.push(v);
+        racers.forEach((v)=>{
+            result.push(...v);
         });
         return result;//[... racers].map(r => r[1]);
     }
