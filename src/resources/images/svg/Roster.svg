@@ -1,1 +1,13 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><title>Roster</title><path d="M28.41,2.94H3.47a.53.53,0,0,0-.53.53V28.41a.53.53,0,0,0,.53.53h21.2a.53.53,0,1,0,0-1.06H4V4H27.88V28.41a.53.53,0,0,0,1.06,0V3.47a.53.53,0,0,0-.53-.53Zm0,0"/><path d="M8.74,8.44a2,2,0,1,0,2,2,2,2,0,0,0-2-2Zm0,3a1,1,0,1,1,1-1,1,1,0,0,1-1,1Zm0,0"/><path d="M24.7,9.94H12.36a.53.53,0,1,0,0,1.06H24.7a.53.53,0,1,0,0-1.06Zm0,0"/><path d="M8.74,13.91a.53.53,0,0,0,0,1.06,1,1,0,1,1-1,1,.53.53,0,1,0-1.06,0,2,2,0,1,0,2-2Zm0,0"/><path d="M24.7,15.41H12.36a.53.53,0,1,0,0,1.06H24.7a.53.53,0,0,0,0-1.06Zm0,0"/><path d="M8.74,19.38a2,2,0,1,0,2,2,2,2,0,0,0-2-2Zm0,3a1,1,0,1,1,1-1,1,1,0,0,1-1,1Zm0,0"/><path d="M24.7,20.88H12.36a.53.53,0,1,0,0,1.06H24.7a.53.53,0,1,0,0-1.06Zm0,0"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="30px" height="30px" viewBox="0 0 30 30" enable-background="new 0 0 30 30" xml:space="preserve">
+<rect x="1.5" y="3.5" fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" width="27" height="23"/>
+<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="6.667" cy="15.167" r="1.5"/>
+<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12" y1="15.5" x2="24" y2="15.5"/>
+<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="6.667" cy="21.167" r="1.5"/>
+<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12" y1="21.5" x2="24" y2="21.5"/>
+<circle fill="#FFFFFF" stroke="#000000" stroke-miterlimit="10" cx="6.667" cy="9.167" r="1.5"/>
+<line fill="none" stroke="#000000" stroke-miterlimit="10" x1="12" y1="9.5" x2="24" y2="9.5"/>
+</svg>

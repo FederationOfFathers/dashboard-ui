@@ -24,6 +24,7 @@ export class ModifyChannel{
         console.log(data);
         this.back.href = data.originator;
         this.channel = this._channelCache.getById(data.id);
+        this._myChannel = this._channelCache.myChannels.find(m => m.id == data.id);
         console.log(this.channel);
     }
 
@@ -44,6 +45,10 @@ export class ModifyChannel{
         if(!this.busy){
             let originalVisibleValue = this.channel.visible;
             this.channel.visible = (isVisible).toString();
+            if(this._myChannel){
+                //This solves the double channel problem right now. Need to have one list of channels
+                this._myChannel.visible = (isVisible).toString();
+            }
             this.busy = true;
             this._groupsApi.visibility(this.channel.id, isVisible)
                 .then(result => {
@@ -53,6 +58,9 @@ export class ModifyChannel{
                     this.busy = false;
                     console.error(err);
                     this.channel.visible = originalVisibleValue;
+                    if(this._myChannel){
+                        this._myChannel.visible = originalVisibleValue;
+                    }                        
                 });
         }
     }

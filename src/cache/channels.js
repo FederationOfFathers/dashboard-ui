@@ -61,4 +61,14 @@ export class ChannelCache{
     get channels(){
         return this._channels
     }
+    // get myChannels(){
+    //     let result = [];
+    //     this._myChannels.forEach(mc => {
+    //         let c = this.channels.find(c => c.id == mc.id);
+    //         if (c) {
+    //             result.push(c);
+    //         }
+    //     })
+    //     return result;
+    // }
 }

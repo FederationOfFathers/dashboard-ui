@@ -44,6 +44,9 @@ tab-bar{
                 text-decoration: none;
                 color: inherit; 
             }
+            &:focus {
+                text-decoration: none;
+            }
 
             svg {
                 height: calc(100% - 20px);

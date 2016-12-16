@@ -8,6 +8,7 @@ import {UserCache} from 'cache/user';
 import {ChannelCache} from 'cache/channels';
 import {ChannelActionPrompt} from 'channels/channel-action-prompt';
 
+import toastr from "toastr";
 
 @inject(GroupsApi, ChannelsApi, UserCache, ChannelCache, DialogService, Router)
 export class MyChannels {
@@ -73,6 +74,7 @@ export class MyChannels {
                         this._channels.splice(channelIndex, 1);
                 })
                 .catch(err => {
+                        toastr.error("Hmmm, Something went wrong...", "Failed to leave");
                         console.error(err)
                 });
         }

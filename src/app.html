@@ -2,11 +2,18 @@
   <require from='./resources/elements/nav-bar/nav-bar'></require>
   <require from='./app.css'></require>
   <require from='bootstrap/css/bootstrap.css'></require>
+  <require from='toastr/build/toastr.css'></require>
 
   <!--<nav-bar router.bind="router"></nav-bar>-->
 
   <div class="page-host">
     <router-view></router-view>
+  </div>
+
+  <div class="modal-navigating" if.bind="navigating">
+    <div class="modal-text">
+      ${waitingMessage}
+    </div>
   </div>
 
   <tab-bar router.bind="router"></tab-bar>
