@@ -8,6 +8,8 @@ import {UserCache} from 'cache/user';
 import configureMainRoutes from 'routes/main';
 import {AuthorizeStep} from 'routes/authorize';
 
+import toastr from 'toastr';
+
 // import {configureDesign} from './design';
 
 @inject(UserApi, UserCache, AuthorizeStep, EventAggregator)
@@ -31,7 +33,11 @@ export class App {
       "Working on it, don't get your panties in a wad...",
       "Hold your horses...",
       "I'm \"working\" on it..."
-    ]
+    ];
+
+    toastr.options = {
+      "positionClass": "toast-top-center",
+    }
 
   }
 

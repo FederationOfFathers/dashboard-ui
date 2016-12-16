@@ -100,10 +100,10 @@
         "name": "vendor-bundle.js",
         "prepend": [
           "node_modules/bluebird/js/browser/bluebird.core.js",
-          "node_modules/requirejs/require.js",
-          "node_modules/jquery/dist/jquery.min.js"
+          "node_modules/requirejs/require.js"
         ],
         "dependencies": [
+          "jquery",
           "aurelia-animator-css",
           "aurelia-binding",
           "aurelia-bootstrapper",
@@ -130,9 +130,19 @@
           "whatwg-fetch",
           "text",
           {
+            "name": "toastr",
+            "path": "../node_modules/toastr",
+            "main": "toastr",
+            "resources": [
+              "build/toastr.min.css"
+            ],
+            "deps": ["jquery"]
+          },
+          {
             "name": "bootstrap",
             "path": "../node_modules/bootstrap/dist",
             "main": "js/bootstrap.min",
+            "deps": ["jquery"],
             "resources": [
               "css/bootstrap.css"
             ]

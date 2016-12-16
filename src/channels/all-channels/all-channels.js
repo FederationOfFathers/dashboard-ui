@@ -8,6 +8,7 @@ import {UserCache} from 'cache/user';
 import {ChannelCache} from 'cache/channels';
 import {ChannelActionPrompt} from 'channels/channel-action-prompt';
 
+import toastr from 'toastr';
 
 @inject(GroupsApi, ChannelsApi, UserCache, ChannelCache, DialogService, Router)
 export class AllChannels {
@@ -44,6 +45,7 @@ export class AllChannels {
                         this._userCache.myChannels.push(channel);
                 })
                 .catch(err => {
+                        toastr.error("Hmmm, Something went wrong...", "Failed to join");
                         channel.member = prevState;
                         console.error(err)
                 });
@@ -63,6 +65,7 @@ export class AllChannels {
                         //this._channelCache.update()//TODO: Don't think this is needed...
                 })
                 .catch(err => {
+                        toastr.error("Hmmm, Something went wrong...", "Failed to leave");
                         channel.member = prevState;
                         console.error(err)
                 });
