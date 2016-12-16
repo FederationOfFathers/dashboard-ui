@@ -9,5 +9,11 @@
     <router-view></router-view>
   </div>
 
+  <div class="modal-navigating" if.bind="navigating">
+    <div class="modal-text">
+      ${waitingMessage}
+    </div>
+  </div>
+
   <tab-bar router.bind="router"></tab-bar>
 </template>

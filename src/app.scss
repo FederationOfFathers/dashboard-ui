@@ -16,6 +16,10 @@ body {
   padding-bottom: $tab-bar-height;
   overflow-x: hidden;
   overflow-y: auto;
+  z-index: 2;
+}
+tab-bar {
+  z-index: 4;
 }
 
 section[class^="page-"], section[class*=" page-"]{
@@ -30,6 +34,31 @@ section[class^="page-"], section[class*=" page-"]{
     padding-bottom: $tab-bar-height;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+}
+
+.modal-navigating{
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.31);
+
+    -webkit-backdrop-filter: blur(2px);
+    z-index: 3;
+  .modal-text{
+    background-color: white;
+
+    position: absolute;
+    top:40%;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    margin:0 40px;
+    text-align: center;
+    border-radius: 3px;
+  }
+
 }
 
 .busy {
