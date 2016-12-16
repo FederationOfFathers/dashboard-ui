@@ -3,6 +3,7 @@ import {BindingEngine, inject, bindable} from 'aurelia-framework';
 @inject(BindingEngine)
 export class SortedList {
   @bindable items;
+  @bindable unsorted;
 
   constructor(bindingEngine){
       this.bindingEngine = bindingEngine;
@@ -14,7 +15,14 @@ export class SortedList {
   itemsChanged(splices){
     //console.log('changed');
     //console.log(this.items);
-      this.groups = this.groupByFirstChar(this.items);
+    if(this.unsorted){
+        this.groups = [{
+            name: '',
+            items: this.items
+        }];
+    } else {
+        this.groups = this.groupByFirstChar(this.items);
+    }
   }
 
   groupByFirstChar(list){
@@ -42,6 +50,7 @@ export class SortedList {
             return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
         });
   }
+
   bind(){
       this.subscription = this.bindingEngine.collectionObserver(this.items).subscribe((splices)=>this.itemsChanged(splices));
       this.itemsChanged();

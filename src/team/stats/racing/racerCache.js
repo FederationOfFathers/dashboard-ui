@@ -24,17 +24,19 @@ export class RacerCache {
         this._raceStats = this._statsMagic.getStatByStatName('srl');
         for(let i = 0; i < this._raceStats.length; i++){
             let stat = this._raceStats[i];
-            let racingStat = {
-                    name: stat.User.GamerTag,
-                    track: stat.Sub3,
-                    time: stat.Value,
-                    description: 'SRL: Best Completion Time'    
+            if(stat.User){
+                let racingStat = {
+                        name: stat.User.GamerTag,
+                        track: stat.Sub3,
+                        time: stat.Value,
+                        description: 'SRL: Best Completion Time'    
+                    }
+                if(racers.has(stat.UserID)){
+                    racers.get(stat.UserID).push(racingStat);
+                } else {
+                    racers.set(stat.UserID, [racingStat]);
                 }
-            if(racers.has(stat.UserID)){
-                racers.get(stat.UserID).push(racingStat);
-            } else {
-                racers.set(stat.UserID, [racingStat]);
-            }
+            }            
         }
         racers.forEach((v)=>{
             result.push(...v);

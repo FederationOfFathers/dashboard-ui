@@ -2,7 +2,7 @@
     <require from="./sorted-list.css"></require>
     <ul class="sorted-list">
         <li repeat.for="group of groups" >
-            <div class="group-header">
+            <div if.bind="group.name" class="group-header">
                 <span>${group.name}</span>
             </div>
             <ul class="items">

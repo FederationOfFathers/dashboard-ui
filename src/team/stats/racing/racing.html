@@ -12,14 +12,11 @@
 
         <search-bar query.bind="query & debounce"></search-bar>
 
-        <sorted-list items.bind="racers">
+        <sorted-list items.bind="racers" unsorted="true">
             <template replace-part="item">
                     <div>
-                            <div class="icon">
-                                    <!--<inline-svg svg="resources/images/svg/${item.type}" ></inline-svg>-->
-                            </div>
+                            <div class="icon">#${item.position}</div>
                             <div class="title">${item.name}</div>
-                            <!--<div class="subtitle">${item.visible == "true" ? '' : '(hidden)'}</div>-->
                             <div class="right">
                                 ${item.time | secondsFormat}
                             </div>

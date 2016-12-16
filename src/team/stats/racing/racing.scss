@@ -14,7 +14,17 @@ section.page-racing {
     sorted-list {
         .item {
             .right{
-                right: 15px;
+                padding-right: 15px;
+                width: 9rem;
+            }
+            .icon {
+                line-height: 36px;
+                font-size: smaller;
+                width: 4rem;
+            }
+            .title {
+                right: 9rem;
+                left: 4rem;
             }
         }
     }
