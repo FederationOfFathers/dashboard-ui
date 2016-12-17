@@ -45,7 +45,11 @@ export class AllChannels {
                         this._userCache.myChannels.push(channel);
                 })
                 .catch(err => {
-                        toastr.error("Hmmm, Something went wrong...", "Failed to join");
+                        if(err.message == "404"){
+                                toastr.error("Can't join a private group", "Failed to join");
+                        } else {
+                                toastr.error("Hmmm, Something went wrong...", "Failed to join");
+                        }
                         channel.member = prevState;
                         console.error(err)
                 });
