@@ -69,7 +69,11 @@ export class AllChannels {
                         //this._channelCache.update()//TODO: Don't think this is needed...
                 })
                 .catch(err => {
-                        toastr.error("Hmmm, Something went wrong...", "Failed to leave");
+                        if(err.message == "404"){
+                                toastr.error("Seems you don't have permission to leave", "Failed to leave");
+                        } else {
+                                toastr.error("Hmmm, Something went wrong...", "Failed to leave");
+                        }
                         channel.member = prevState;
                         console.error(err)
                 });
