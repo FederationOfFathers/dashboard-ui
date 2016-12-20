@@ -74,7 +74,11 @@ export class MyChannels {
                         this._channels.splice(channelIndex, 1);
                 })
                 .catch(err => {
-                        toastr.error("Hmmm, Something went wrong...", "Failed to leave");
+                        if(err.message == "404"){
+                                toastr.error("Seems you don't have permission to leave", "Failed to leave");
+                        } else {
+                                toastr.error("Hmmm, Something went wrong...", "Failed to leave");
+                        }
                         console.error(err)
                 });
         }
