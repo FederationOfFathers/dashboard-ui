@@ -33,9 +33,9 @@
                 position: relative;
                 line-height: 30px;
             }
-            switch,
-            button,
-            .right {
+            > switch,
+            > button,
+            > .right {
                 position: absolute;
                 display: inline-block;
                 right: 15px;
