@@ -5,6 +5,8 @@ import {GroupsApi} from 'api/groups';
 import {ChannelCache} from 'cache/channels';
 import {UserCache} from 'cache/user';
 
+import toastr from 'toastr';
+
 @inject(Router, GroupsApi, ChannelCache, UserCache)
 export class ModifyChannel{
 
@@ -15,15 +17,24 @@ export class ModifyChannel{
         this._userCache = userCache;
         this.busy = false;
 
+        this.requestSent = false;
         
         this.channel = {};
     }
 
+    
     activate(data){
         //Need to ensure that channelCache has been loaded
         console.log(data);
-        this.back.href = data.originator;
+        this.requestSent = false;
         this.channel = this._channelCache.getById(data.id);
+        if(!this.channel){
+            console.log('Failed to find channel');
+            return false;
+        }
+
+        this.back.href = data.originator;
+        // this.channel = this._channelCache.getById(data.id);
         this._myChannel = this._channelCache.myChannels.find(m => m.id == data.id);
         console.log(this.channel);
     }
@@ -35,6 +46,32 @@ export class ModifyChannel{
             //Most likely refreshed page and we don't have a "back" to go to
             console.log(err);
             this._router.navigateTo('channels');
+        }
+    }
+
+    requestAccessChange(){
+        if(!this.busy){
+            this.busy = true;
+            let state = this.channel.visible == "true" ? false : true;
+            this._groupsApi.visibility(this.channel.id, state)
+                .then(result => {
+                    this.busy = false;
+                    this.requestSent = true;
+                    toastr.success("Request sent, you can stop clicking now", "Sent");
+                })
+                .catch(err => {
+                    this.busy = false;
+                    //Wierd case of dealing with 403 because we're not an admin
+                    if(err.message == "403"){
+                        this.requestSent = true;
+                        toastr.success("Request sent, you can stop clicking now", "Sent")
+                    } else {
+                        console.error(err);  
+                        toastr.error("Well crap, it broke. Check out #dashboard-help", "Dammit Jim");                    
+                    }
+                });
+        } else {
+            toastr.warning("Wait for it, you've already asked", "Patience");
         }
     }
 
@@ -66,6 +103,15 @@ export class ModifyChannel{
     }
     get canChangeVisibility(){
         return this.channel.type == "Group" && this._userCache.get().admin;
+    }
+    get canRequestVisibility(){
+        return this.channel.type == "Group" && !this._userCache.get().admin;
+    }
+    get isPrivate(){
+        return this.channel.visible == "false";
+    }
+    get canRequestPrivate(){
+        return !this.isPrivate && this.channel.member == true;
     }
 }
 

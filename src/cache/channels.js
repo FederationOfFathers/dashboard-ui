@@ -12,7 +12,7 @@ export class ChannelCache{
         this._channelsApi = channelsApi;
         this._channels = [];
 
-        this.myChannels = this._userCache.myChannels;
+        this._myChannels = [];
     }
 
     getById(id){
@@ -21,6 +21,7 @@ export class ChannelCache{
     update(){
         return Promise.all([this._groupsApi.get(),this._channelsApi.get()])
                 .then(values => {
+                    console.log(values);
                         for(let groupId in values[0]){
                             let group = values[0][groupId]
                             group.type = 'Group';
@@ -53,22 +54,23 @@ export class ChannelCache{
                 this._channels.push(channels[key]);
             }
         }
-        this._channels.sort((a, b) => {
-            return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-        });
+        this._channels = this._channels
+            .concat(this._userCache.myChannels
+                .filter(c => {
+                    //Make sure we're just merging groups and not duplicate groups
+                    return c.type == "Group" && this._channels.findIndex(i => i.id == c.id) < 0
+                }))
+                .sort((a, b) => {
+                    return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+                });
         //TODO: ASAP: Create a channel model to use to unify channel/group object structure
     }
     get channels(){
-        return this._channels
+        return this._channels;
     }
-    // get myChannels(){
-    //     let result = [];
-    //     this._myChannels.forEach(mc => {
-    //         let c = this.channels.find(c => c.id == mc.id);
-    //         if (c) {
-    //             result.push(c);
-    //         }
-    //     })
-    //     return result;
-    // }
+    get myChannels(){
+        return this.channels.filter(c => {
+            return c.member == true;
+        });
+    }
 }

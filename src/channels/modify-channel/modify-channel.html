@@ -18,6 +18,20 @@
                         <p>Anybody can see and join</p>
                     </div>
                 </article>
+                <article if.bind="canRequestVisibility">
+                    <div if.bind="isPrivate" class="text-container expanded">
+                        <label>Request to make public</label>
+                        <button class="f-btn" click.trigger="requestAccessChange()" if.bind="!requestSent">Requst Public</button>
+                        <div class="right" if.bind="requestSent">Request sent!</div>
+                        <p>Anybody can see and join</p>
+                    </div>
+                    <div if.bind="canRequestPrivate" class="text-container expanded">
+                        <label>Request to make private</label>
+                        <button class="f-btn" click.trigger="requestAccessChange()" if.bind="!requestSent">Requst Private</button>
+                        <div class="right" if.bind="requestSent">Request sent!</div>
+                        <p>Anybody members can see</p>
+                    </div>
+                </article>
                 <article>
                     <div class="text-container expanded">
                         <label>Stats</label>                        

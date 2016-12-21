@@ -20,7 +20,6 @@ export class MyChannels {
                 this._channelCache = channelCache;
                 this._router = router;
                 this.dialogService = dialogService;
-                this._channels = this._channelCache.myChannels;
                 this.query = "";
                 this.more = {
                         title: 'All',
@@ -29,7 +28,7 @@ export class MyChannels {
         }
 
         activate(){
-                //this.channels = this._channelCache.myChannels;
+                this.channels = this._channelCache.myChannels;
         }
 
         modifyChannel(channel){
@@ -70,8 +69,8 @@ export class MyChannels {
                 channel.member = false;
                 return request.then(response => {
                         //this._channelCache.update()//TODO: Don't think this is needed...
-                        let channelIndex = this._channels.findIndex(c => c.id == channel.id);
-                        this._channels.splice(channelIndex, 1);
+                        let channelIndex = this.channels.findIndex(c => c.id == channel.id);
+                        this.channels.splice(channelIndex, 1);
                 })
                 .catch(err => {
                         if(err.message == "404"){
@@ -111,9 +110,6 @@ export class MyChannels {
         get user(){
                 return this._userCache.get();
         }
-        
-        get channels(){
-                return this._channels;
-        }
+
 
 }

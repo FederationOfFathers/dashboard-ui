@@ -36,5 +36,9 @@ export function configure(aurelia) {
     aurelia.use.plugin('aurelia-testing');
   }
 
-  aurelia.start().then(() => aurelia.setRoot());
+  aurelia.start()
+    .then(() => aurelia.setRoot())
+    .catch(err => {
+      console.error(err);
+    });
 }

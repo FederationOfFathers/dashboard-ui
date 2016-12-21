@@ -24,6 +24,7 @@ export class UserCache{
         this.myChannels = this._user.groups
             .map(g => {
                 g.type = "Group"; 
+                g.member = true;
                 g.visible = this._user.group_visible[g.id] == "false" ? "false" : "true";//g.visible ? g.visible.toString() : "false";
                 return g;
             })
