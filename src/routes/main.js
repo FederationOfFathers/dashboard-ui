@@ -93,6 +93,19 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             }
         },
         {
+            route: 'members/:name?',
+            name: 'members',
+            //moduleId: 'members/redirect/me',
+            moduleId: 'members/single/member',
+            title: 'Members',
+            nav: true,
+            href: "#members/",
+            settings: {
+                    roles: ["user"],
+                    icon: 'resources/images/svg/Channels'
+            }
+        },
+        {
             route: 'login',
             name: 'login',
             moduleId: 'login',
