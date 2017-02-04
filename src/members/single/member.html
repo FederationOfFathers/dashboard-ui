@@ -1,15 +1,17 @@
 <template>
         <section>
-                <h1>Profile Page For ${_user.GamerTag}</h1>
-                <h3>Streaming</h3>
-                <div style="padding-left: 1em;">
+                <h1><img style="height: 1.5em; width: 1.5em;" src.bind="_user.Image"/> ${_user.DisplayName}</h1>
+                <div style="padding-left: 1em;" if.bind="streams.twitch != '' || streams.beam != '' || editable() === true">
+                        <h2>Streams</h2>
                         <table>
-                                <tr>
-                                        <td>
+                                <tr if.bind="streams.twitch != '' || editable() === true">
+                                        <td style="width: 10em;">
                                                 <strong>Twitch</strong>
                                         </td>
                                         <td>
-                                                <span if.bind="false === editable()">${streams.twitch}</span>
+                                                <span if.bind="false === editable()">
+                                                        <a href="https://www.twitch.tv/${streams.twitch}">${streams.twitch}</a>
+                                                </span>
                                                 <span if.bind="true === editable()">
                                                         <input 
                                                                 type="text" 
@@ -20,12 +22,14 @@
                                                 </span>
                                         </td>
                                 </tr>
-                                <tr>
-                                        <td>
+                                <tr if.bind="streams.beam != '' || editable() === true">
+                                        <td style="width: 10em;">
                                                 <strong>Beam</strong>
                                         </td>
                                         <td>
-                                                <span if.bind="false === editable()">${streams.beam}</span>
+                                                <span if.bind="false === editable()">
+                                                        <a href="https://beam.pro/${streams.beam}">${streams.beam}</a>
+                                                </span>
                                                 <span if.bind="true === editable()">
                                                         <input 
                                                                 type="text" 
@@ -39,10 +43,11 @@
                         </table>
 
                 <h2>Channels</h2>
-                <div style="padding-left: 1em;">
-                        <div repeat.for="channel of _channels">
-                                ${channel.name}
-                        </div>    
-                </div>
+                <ul style="margin: 0 auto; text-align: center; padding: 0;">
+                        <li repeat.for="channel of _channels"
+                                style="display: inline-block; vertical-align: top; background: white; border 1px solid gray; margin: 0.25em; padding: 0.25em; width: 15em;">
+                                <a href="/#/channels/${channel.id}">${channel.name}</a>
+                        </li>
+                </ul>
         </section>
 </template>
