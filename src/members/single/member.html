@@ -3,9 +3,40 @@
                 <h1>Profile Page For ${_user.GamerTag}</h1>
                 <h3>Streaming</h3>
                 <div style="padding-left: 1em;">
-                        <div><strong>Twitch</strong> ${streams.twitch} <a if.bind="editable()">change</a></div>
-                        <div><strong>Beam</strong> ${streams.beam} <a if.bind="editable()">change</a></div>
-                </div>
+                        <table>
+                                <tr>
+                                        <td>
+                                                <strong>Twitch</strong>
+                                        </td>
+                                        <td>
+                                                <span if.bind="false === editable()">${streams.twitch}</span>
+                                                <span if.bind="true === editable()">
+                                                        <input 
+                                                                type="text" 
+                                                                value.bind="streams.twitch" 
+                                                                placeholder="twitch.tv username"/>
+                                                        <button 
+                                                                click.trigger="setStream('twitch')">update</button>
+                                                </span>
+                                        </td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                                <strong>Beam</strong>
+                                        </td>
+                                        <td>
+                                                <span if.bind="false === editable()">${streams.beam}</span>
+                                                <span if.bind="true === editable()">
+                                                        <input 
+                                                                type="text" 
+                                                                value.bind="streams.beam" 
+                                                                placeholder="beam.pro username"/>
+                                                        <button 
+                                                                click.trigger="setStream('beam')">update</button>
+                                                </span>
+                                        </td>
+                                </tr>
+                        </table>
 
                 <h2>Channels</h2>
                 <div style="padding-left: 1em;">

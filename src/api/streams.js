@@ -10,7 +10,7 @@ export class StreamsApi {
 
     get(slackID){
         if(slackID){
-            return this.api.get("streams/${slackID}");
+            return this.api.get("streams/" + slackID);
         } else {
             return this.api.get("streams");
         }
@@ -20,7 +20,7 @@ export class StreamsApi {
         return this.api.delete("streams/${slackID}/${type}");
     }
 
-    set(slackID, key, type, id){
-        return this.api.post("streams")
+    set(slackID, type, id){
+        return this.api.put("streams", {kind: type, id: id, userID: slackID});
     }
 }

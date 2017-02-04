@@ -26,8 +26,8 @@ export class Member{
         this._user = null
         this._channels = []
         this.streams = {
-            twitch: "t",
-            beam: "b",
+            twitch: "",
+            beam: "",
         }
     }
 
@@ -38,13 +38,13 @@ export class Member{
         return false
     }
 
-    setStream(kind, id) {
+    setStream(kind) {
+        this._streamsApi.set(this._user.Id, kind, this.streams[kind])
     }
 
     activate(data){
         if ( typeof data.name == 'undefined' ) {
             this._router.navigateToRoute('members', {name: this._userCache.user.name})
-            return
         }
         this._name = data.name
         this._lcName = data.name.toLowerCase()
@@ -59,14 +59,14 @@ export class Member{
                 this._lookup.name[user.Name] = user
                 this._lookup.id[user.Id] = user
             }.bind(this))
+            this.streams.beam = ""
+            this.streams.twitch = ""
             if ( this._user === null ) {
                 this._router.navigateToRoute('members', {name: this._userCache.user.name})
             } else {
-                this._streamsApi.get(this._user.ID).then(function(s) {
-                    if ( s.length > 0 ) {
-                        this.streams.beam = s[0].Beam
-                        this.streams.twitch = s[0].Twitch
-                    }
+                this._streamsApi.get(this._user.Id).then(function(s) {
+                        this.streams.beam = s.Beam
+                        this.streams.twitch = s.Twitch
                 }.bind(this));
             }
             return this._channelCache.update().then(function() {
