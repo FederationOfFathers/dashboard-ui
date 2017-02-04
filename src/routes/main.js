@@ -42,7 +42,7 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             route: ['racing-stats', 'racing-stats/*details'],
             name: 'racing-stats',
             moduleId: 'team/stats/racing/racing',
-            nav: true,
+            nav: false,
             title: 'SRL (Beta)',
             settings: {
                 roles: ["user"],
