@@ -24,7 +24,10 @@ export class UsersCache{
                 Seen: user.Seen,
                 GamerTag: user.User.GamerTag,
                 Id: user.User.ID,
-                Name: user.User.Name
+                Name: user.User.Name,
+                DisplayName: user.User.DisplayName,
+                Image: user.User.Image,
+                Thumb: user.User.Thumb
             })
         }
     }
