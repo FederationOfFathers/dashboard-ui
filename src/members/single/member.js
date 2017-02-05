@@ -29,9 +29,20 @@ export class Member{
             twitch: "",
             beam: "",
         }
+        this.streams_original = {
+            twitch: "",
+            beam: "",
+        }
+        this.updating = {
+            twitch: false,
+            beam: false,
+        }
     }
 
     editable() {
+        if ( this._user === null ) {
+            return false
+        }
         if ( this._user.Id === this._userCache.user.id || this._userCache.user.is_admin ) {
             return true
         }
@@ -39,12 +50,24 @@ export class Member{
     }
 
     setStream(kind) {
-        this._streamsApi.set(this._user.Id, kind, this.streams[kind])
+        this.updating[kind] = true
+        this._streamsApi.set(
+            this._user.Id,
+            kind,
+            this.streams[kind].replace(/^\s*(https?:\/\/)?(beam\.pro|(www\.)?twitch\.tv)(\/*)?/i, ""))
+        .then(function(){
+            this.updating[kind] = false
+        }.bind(this))
+        .catch(function() {
+            this.updating[kind] = false
+            window.alert("error updating " + kind + " please try again later")
+        }.bind(this))
     }
 
     activate(data){
         if ( typeof data.name == 'undefined' ) {
-            this._router.navigateToRoute('members', {name: this._userCache.user.name})
+            this._router.navigate('members/' + this._userCache.user.name)
+            return false
         }
         this._name = data.name
         this._lcName = data.name.toLowerCase()
@@ -65,6 +88,8 @@ export class Member{
                 this._router.navigateToRoute('members', {name: this._userCache.user.name})
             } else {
                 this._streamsApi.get(this._user.Id).then(function(s) {
+                        this.streams_original.beam = s.Beam
+                        this.streams_original.twitch = s.Twitch
                         this.streams.beam = s.Beam
                         this.streams.twitch = s.Twitch
                 }.bind(this));

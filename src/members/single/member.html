@@ -17,7 +17,8 @@
                                                                 type="text" 
                                                                 value.bind="streams.twitch" 
                                                                 placeholder="twitch.tv username"/>
-                                                        <button 
+                                                        <button if.bind="streams.twitch != streams_original.twitch"
+                                                                disabled.bind="updating.twitch === true"
                                                                 click.trigger="setStream('twitch')">update</button>
                                                 </span>
                                         </td>
@@ -35,7 +36,8 @@
                                                                 type="text" 
                                                                 value.bind="streams.beam" 
                                                                 placeholder="beam.pro username"/>
-                                                        <button 
+                                                        <button if.bind="streams.beam != streams_original.beam" 
+                                                                disabled.bind="updating.beam === true"
                                                                 click.trigger="setStream('beam')">update</button>
                                                 </span>
                                         </td>
