@@ -37,6 +37,8 @@ export class Member{
             twitch: false,
             beam: false,
         }
+        this._navUsername = ""
+        this._userList = []
     }
 
     editable() {
@@ -65,6 +67,10 @@ export class Member{
         }.bind(this))
     }
 
+    navigateTo() {
+        this._router.navigate('members/' + this._navUsername)
+    }
+
     activate(data){
         if ( typeof data.name == 'undefined' ) {
             this._router.navigate('members/' + this._userCache.user.name)
@@ -73,6 +79,7 @@ export class Member{
         this._channels = []
         this._name = data.name
         this._lcName = data.name.toLowerCase()
+        this._navUsername = this._lcName
         this.streams.beam = ""
         this.streams.twitch = ""
         return this._usersCache.initialize().then(function() {
@@ -80,12 +87,16 @@ export class Member{
                 if ( user.Name.toLowerCase() == this._lcName ) {
                     this._user = user
                 }
+                if ( user.Name === "" || user.Name == "damnbot" || user.Name == "fofbot" || user.Name == "slackbot" ) {
+                    return;
+                }
                 this._names.push(user.Name)
                 this._gts.push(user.GamerTag)
                 this._lookup.gt[user.GamerTag] = user
                 this._lookup.name[user.Name] = user
                 this._lookup.id[user.Id] = user
             }.bind(this))
+            this._userList = Object.keys(this._lookup.name).sort()
             if ( this._user === null ) {
                 this._router.navigateToRoute('members', {name: this._userCache.user.name})
             } else {

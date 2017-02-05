@@ -1,6 +1,12 @@
 <template>
         <section>
                 <h1><img style="height: 1.5em; width: 1.5em;" src.bind="_user.Image"/> ${_user.DisplayName}</h1>
+                <select style="height: 2em;" value.bind="_navUsername" change.delegate="navigateTo()">
+                        <option
+                        repeat.for="username of _userList"
+                        value.bind="username"
+                        >${_lookup.name[username].DisplayName}</option>
+                </select>
                 <div style="padding-left: 1em;" if.bind="streams.twitch != '' || streams.beam != '' || editable() === true">
                         <h2>Streams</h2>
                         <table>
