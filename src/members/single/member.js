@@ -70,8 +70,11 @@ export class Member{
             this._router.navigate('members/' + this._userCache.user.name)
             return false
         }
+        this._channels = []
         this._name = data.name
         this._lcName = data.name.toLowerCase()
+        this.streams.beam = ""
+        this.streams.twitch = ""
         return this._usersCache.initialize().then(function() {
             this._usersCache.users.forEach(function(user) {
                 if ( user.Name.toLowerCase() == this._lcName ) {
@@ -83,8 +86,6 @@ export class Member{
                 this._lookup.name[user.Name] = user
                 this._lookup.id[user.Id] = user
             }.bind(this))
-            this.streams.beam = ""
-            this.streams.twitch = ""
             if ( this._user === null ) {
                 this._router.navigateToRoute('members', {name: this._userCache.user.name})
             } else {
