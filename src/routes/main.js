@@ -102,7 +102,7 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             href: "#members/",
             settings: {
                     roles: ["user"],
-                    icon: 'resources/images/svg/Channels'
+                    icon: 'resources/images/svg/Roster'
             }
         },
         {
