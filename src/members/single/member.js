@@ -57,6 +57,7 @@ export class Member{
             this.streams[kind].replace(/^\s*(https?:\/\/)?(beam\.pro|(www\.)?twitch\.tv)(\/*)?/i, ""))
         .then(function(){
             this.updating[kind] = false
+            this.streams_original[kind] = this.streams[kind]
         }.bind(this))
         .catch(function() {
             this.updating[kind] = false
