@@ -45,9 +45,8 @@ export class App {
     
     return this.getUserInfo()
       .catch(err => {
-                let response = err.message.split(":")[1].trim();
-                if(response == "401"){
-                    window.location.href="#login";//this.router.navigate('#/login')
+                if (err.messsage != undefined && err.message.split(":")[1].trim() == "401") {
+                    window.location.href = "#login"; //this.router.navigate('#/login')
                 }
             });
   }
