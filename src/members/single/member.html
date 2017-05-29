@@ -49,13 +49,15 @@
                                         </td>
                                 </tr>
                         </table>
-
-                <h2>Channels</h2>
-                <ul style="margin: 0 auto; text-align: center; padding: 0;">
-                        <li repeat.for="channel of _channels"
-                                style="display: inline-block; vertical-align: top; background: white; border 1px solid gray; margin: 0.25em; padding: 0.25em; width: 15em;">
-                                <a href="/#/channels/${channel.id}">${channel.name}</a>
-                        </li>
-                </ul>
+                </div>
+                <div style="padding-left: 1em;">
+                        <h2>Channels</h2>
+                        <ul style="margin: 0 auto; text-align: center; padding: 0;">
+                                <li repeat.for="channel of _channels"
+                                        style="display: inline-block; vertical-align: top; background: white; border 1px solid gray; margin: 0.25em; padding: 0.25em; width: 15em;">
+                                        <a href="/#/channels/${channel.id}">${channel.name}</a>
+                                </li>
+                        </ul>
+                </div>
         </section>
 </template>
