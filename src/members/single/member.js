@@ -45,7 +45,7 @@ export class Member{
         if ( this._user === null ) {
             return false
         }
-        if ( this._user.Id === this._userCache.user.id || this._userCache.user.is_admin ) {
+        if (this._userCache.user.is_admin ) {
             return true
         }
         return false
