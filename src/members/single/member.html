@@ -7,21 +7,21 @@
                         value.bind="username"
                         >${_lookup.name[username].DisplayName}</option>
                 </select>
-                <div style="padding-left: 1em;" if.bind="streams.twitch != '' || streams.beam != '' || editable() === true">
+                <div style="padding-left: 1em;" if.bind="streams.twitch != '' || streams.beam != '' || _editable">
                         <h2>Streams</h2>
                         <table>
-                                <tr if.bind="streams.twitch != '' || editable() === true">
+                                <tr if.bind="streams.twitch != '' || _editable">
                                         <td style="width: 10em;">
                                                 <strong>Twitch</strong>
                                         </td>
                                         <td>
-                                                <span if.bind="false === editable()">
+                                                <span if.bind="false === _editable">
                                                         <a href="https://www.twitch.tv/${streams.twitch}">${streams.twitch}</a>
                                                 </span>
-                                                <span if.bind="true === editable()">
-                                                        <input 
-                                                                type="text" 
-                                                                value.bind="streams.twitch" 
+                                                <span if.bind="true === _editable">
+                                                        <input
+                                                                type="text"
+                                                                value.bind="streams.twitch"
                                                                 placeholder="twitch.tv username"/>
                                                         <button if.bind="streams.twitch != streams_original.twitch"
                                                                 disabled.bind="updating.twitch === true"
@@ -29,20 +29,20 @@
                                                 </span>
                                         </td>
                                 </tr>
-                                <tr if.bind="streams.beam != '' || editable() === true">
+                                <tr if.bind="streams.beam != '' || _editable">
                                         <td style="width: 10em;">
                                                 <strong>Beam</strong>
                                         </td>
                                         <td>
-                                                <span if.bind="false === editable()">
+                                                <span if.bind="false === _editable">
                                                         <a href="https://beam.pro/${streams.beam}">${streams.beam}</a>
                                                 </span>
-                                                <span if.bind="true === editable()">
-                                                        <input 
-                                                                type="text" 
-                                                                value.bind="streams.beam" 
+                                                <span if.bind="true === _editable">
+                                                        <input
+                                                                type="text"
+                                                                value.bind="streams.beam"
                                                                 placeholder="beam.pro username"/>
-                                                        <button if.bind="streams.beam != streams_original.beam" 
+                                                        <button if.bind="streams.beam != streams_original.beam"
                                                                 disabled.bind="updating.beam === true"
                                                                 click.trigger="setStream('beam')">update</button>
                                                 </span>
