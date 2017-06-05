@@ -15,6 +15,7 @@ export class Member{
         this._channelCache = channelCache;
         this._userCache = userCache;
         this._usersCache = usersCache
+        this._editable = false
         this._streamsApi = streamsApi
         this._gts = []
         this._lookup = {
@@ -45,7 +46,7 @@ export class Member{
         if ( this._user === null ) {
             return false
         }
-        if (this._userCache.user.is_admin ) {
+        if ( this._user.Id === this._userCache.user.id || this._userCache.user.is_admin ) {
             return true
         }
         return false
@@ -73,6 +74,7 @@ export class Member{
 
     activate(data){
         if ( typeof data.name == 'undefined' ) {
+            this._user = this._userCache.user.name
             this._router.navigate('members/' + this._userCache.user.name)
             return false
         }
@@ -96,6 +98,7 @@ export class Member{
                 this._lookup.name[user.Name] = user
                 this._lookup.id[user.Id] = user
             }.bind(this))
+            this._editable = this.editable();
             this._userList = Object.keys(this._lookup.name).sort()
             if ( this._user === null ) {
                 this._router.navigateToRoute('members', {name: this._userCache.user.name})
