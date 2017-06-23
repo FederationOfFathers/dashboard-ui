@@ -18,16 +18,12 @@ User Interface for the new dashboard project
 
 # Environment Setup
 
-1. npm install aurelia-cli -g
-2. `npm install -g gulp` (???)
-3. `npm install -g jspm` (???)
-4. `jspm registry config github` (???)
+1. npm install aurelia-cli -g)
 
 # Project setup
 
 1. `cd dashboard`
 2. `npm install`
-3. `jspm install -y` (???)
 
 # Local Dev
 1. `cd dashboard`
