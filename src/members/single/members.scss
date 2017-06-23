@@ -1,0 +1,23 @@
+section.member {
+    >div{
+        padding-left: 1em;
+        clear: both;
+    }
+
+    .channels {
+        ul {
+            margin: 0 auto;
+            text-align: center;
+            padding: 0;
+            li {
+                display: inline-block;
+                vertical-align: top;
+                background: white;
+                border: 1px solid gray;
+                margin: 0.25em;
+                padding: 0.25em;
+                width: 15em;
+            }
+        }
+    }
+}

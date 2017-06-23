@@ -6,22 +6,33 @@ import {ChannelCache} from 'cache/channels';
 import {UserCache} from 'cache/user';
 import {UsersCache} from 'cache/users';
 import {StreamsApi} from 'api/streams';
+import {MemberMetaApi} from 'api/member-meta';
 
-@inject(Router, ChannelCache, UserCache, UsersCache, StreamsApi)
+@inject(Router, ChannelCache, UserCache, UsersCache, StreamsApi, MemberMetaApi)
 export class Member{
 
-    constructor(router, channelCache, userCache, usersCache, streamsApi){
+    constructor(router, channelCache, userCache, usersCache, streamsApi, memberMetaApi){
         this._router = router;
         this._channelCache = channelCache;
         this._userCache = userCache;
         this._usersCache = usersCache
         this._streamsApi = streamsApi
+        this._memberMetaApi = memberMetaApi
         this._gts = []
         this._lookup = {
             gt: {},
             name: {},
             id: {}
         }
+        this.meta = {
+            gt_xbox: "",
+            gt_psn: "",
+            steam: "",
+            bnet: "",
+            facebook: "",
+            twitter: ""
+        }
+        this.meta_original = this.meta
         this._names = []
         this._user = null
         this._channels = []
@@ -41,6 +52,28 @@ export class Member{
         this._userList = []
     }
 
+    enableStreamEdit() {
+        if (this._editable) {
+            this._streamEditEnabled = true
+        }
+    }
+
+    disableStreamEdit() {
+        this._streamEditEnabled = false
+        this.streams = this.streams_original
+    }
+
+    enableMetaEdit() {
+        if (this._editable) {
+            this._metaEditEnabled = true
+        }
+    }
+
+    disableMetaEdit() {
+        this.meta = this.meta_original
+        this._metaEditEnabled = false
+    }
+
     editable() {
         if ( this._user === null ) {
             return false
@@ -49,6 +82,24 @@ export class Member{
             return true
         }
         return false
+    }
+
+    setMemberMeta() {
+        let metaJson = {};
+        metaJson.gt_xbox = this.meta.gt_xbox;
+        metaJson.gt_psn = this.meta.gt_psn;
+        metaJson.steam = this.meta.steam;
+        metaJson.bnet = this.meta.bnet;
+
+        this._memberMetaApi.set(this._user.Id, metaJson)
+        .then(function() {
+            this.meta_original = this.meta;
+            this._metaEditEnabled = false;
+        }.bind(this))
+        .catch(function() {
+
+        }.bind(this))
+
     }
 
     setStream(kind) {
@@ -82,6 +133,8 @@ export class Member{
         this._navUsername = this._lcName
         this.streams.beam = ""
         this.streams.twitch = ""
+        this._streamEditEnabled = false
+        this._metaEditEnabled = false
         return this._usersCache.initialize().then(function() {
             this._usersCache.users.forEach(function(user) {
                 if ( user.Name.toLowerCase() == this._lcName ) {
@@ -106,6 +159,11 @@ export class Member{
                         this.streams.beam = s.Beam
                         this.streams.twitch = s.Twitch
                 }.bind(this));
+
+                this._memberMetaApi.get(this._user.Id).then(function(meta) {
+                    this.meta = meta;
+                    this.meta_original = meta;
+                }.bind(this))
             }
             return this._channelCache.update().then(function() {
                 this._channelCache.channels.forEach(function(channel) {

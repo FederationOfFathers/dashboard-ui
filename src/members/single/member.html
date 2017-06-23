@@ -1,60 +1,90 @@
 <template>
-        <section>
-                <h1><img style="height: 1.5em; width: 1.5em;" src.bind="_user.Image"/> ${_user.DisplayName}</h1>
-                <select style="height: 2em;" value.bind="_navUsername" change.delegate="navigateTo()">
-                        <option
-                        repeat.for="username of _userList"
-                        value.bind="username"
-                        >${_lookup.name[username].DisplayName}</option>
-                </select>
-                <div style="padding-left: 1em;" if.bind="streams.twitch != '' || streams.beam != '' || editable() === true">
-                        <h2>Streams</h2>
-                        <table>
-                                <tr if.bind="streams.twitch != '' || editable() === true">
-                                        <td style="width: 10em;">
-                                                <strong>Twitch</strong>
-                                        </td>
-                                        <td>
-                                                <span if.bind="false === editable()">
-                                                        <a href="https://www.twitch.tv/${streams.twitch}">${streams.twitch}</a>
-                                                </span>
-                                                <span if.bind="true === editable()">
-                                                        <input 
-                                                                type="text" 
-                                                                value.bind="streams.twitch" 
-                                                                placeholder="twitch.tv username"/>
-                                                        <button if.bind="streams.twitch != streams_original.twitch"
-                                                                disabled.bind="updating.twitch === true"
-                                                                click.trigger="setStream('twitch')">update</button>
-                                                </span>
-                                        </td>
-                                </tr>
-                                <tr if.bind="streams.beam != '' || editable() === true">
-                                        <td style="width: 10em;">
-                                                <strong>Beam</strong>
-                                        </td>
-                                        <td>
-                                                <span if.bind="false === editable()">
-                                                        <a href="https://beam.pro/${streams.beam}">${streams.beam}</a>
-                                                </span>
-                                                <span if.bind="true === editable()">
-                                                        <input 
-                                                                type="text" 
-                                                                value.bind="streams.beam" 
-                                                                placeholder="beam.pro username"/>
-                                                        <button if.bind="streams.beam != streams_original.beam" 
-                                                                disabled.bind="updating.beam === true"
-                                                                click.trigger="setStream('beam')">update</button>
-                                                </span>
-                                        </td>
-                                </tr>
-                        </table>
+    <require from="./members.css"></require>
+        <section class="member">
+            <select style="height: 2em; margin-top: 0.5em;" value.bind="_navUsername" change.delegate="navigateTo()">
+                    <option
+                    repeat.for="username of _userList"
+                    value.bind="username"
+                    >${_lookup.name[username].DisplayName}</option>
+            </select>
+            <h1><img style="height: 1.5em; width: 1.5em;" src.bind="_user.Image"/> ${_user.DisplayName}</h1>
+            <div class="profile" >
+                <h2>Profile <button if.bind="_editable && !_metaEditEnabled" type="button" class="btn btn-link" click.delegate="enableMetaEdit()">edit</button></h2>
+                <form class="form-horizontal">
+                    <div class="form-group" if.bind="_metaEditEnabled || meta.gt_xbox">
+                        <label class="col-sm-2 control-label" for="xbox_gt">Xbox GamerTag</label>
+                        <div class="col-sm-4">
+                            <p class="form-control-static" if.bind="!_metaEditEnabled">${meta.gt_xbox}</p>
+                            <input if.bind="_metaEditEnabled" type="text" class="form-control" id="xbox_gt" value.bind="meta.gt_xbox" placeholder="Xbox GamerTag"/>
+                        </div>
+                    </div>
+                    <div class="form-group" if.bind="_metaEditEnabled || meta.gt_psn">
+                        <label class="col-sm-2 control-label" for="psn_id">PSN ID</label>
+                        <div class="col-sm-4">
+                            <p class="form-control-static" if.bind="!_metaEditEnabled">${meta.gt_psn}</p>
+                            <input if.bind="_metaEditEnabled" type="text" class="form-control" id="psn_id" value.bind="meta.gt_psn" placeholder="PSN ID"/>
+                        </div>
+                    </div>
+                    <div class="form-group" if.bind="_metaEditEnabled || meta.steam">
+                        <label class="col-sm-2 control-label" for="steam">Steam Username</label>
+                        <div class="col-sm-4">
+                            <p class="form-control-static" if.bind="!_metaEditEnabled">${meta.steam}</p>
+                            <input if.bind="_metaEditEnabled" type="text" class="form-control" id="steam" value.bind="meta.steam" placeholder="Steam Username"/>
+                        </div>
+                    </div>
+                    <div class="form-group" if.bind="_metaEditEnabled || meta.bnet">
+                        <label class="col-sm-2 control-label" for="bnet">Battle.net</label>
+                        <div class="col-sm-4">
+                            <p class="form-control-static" if.bind="!_metaEditEnabled">${meta.bnet}</p>
+                            <input if.bind="_metaEditEnabled" type="text" class="form-control" id="bnet" value.bind="meta.bnet" placeholder="Battle.net ID"/>
+                        </div>
+                    </div>
+                    <div class="form-group" if.bind="_metaEditEnabled">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <button type="button" class="btn btn-primary" click.delegate="setMemberMeta()">save</button>
+                            <button type="button" class="btn btn-link" click.delegate="disableMetaEdit()">cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+                <div class="streams" if.bind="_hasStreams || _editable">
+                        <h2>Streams<button if.bind="_editable && !_streamEditEnabled" click.delegate="enableStreamEdit()" type="button" class="btn btn-link">edit</button></h2>
+
+                        <form class="form-horizontal">
+                            <div class="form-group" if.bind="streams.twitch != '' || _streamEditEnabled">
+                                <label class="col-sm-2 control-label" for="twitch">Twitch</label>
+                                <div class="col-sm-4">
+                                    <p if.bind="!_streamEditEnabled" class="form-control-static"><a href="https://www.twitch.tv/${streams.twitch}">${streams.twitch}</a></p>
+                                    <input if.bind="_streamEditEnabled" type="text" class="form-control" id="twitch" value.bind="streams.twitch" placeholder="twitch.tv username"/>
+                                </div>
+                            </div>
+                            <div class="form-group" if.bind="streams.beam != '' || _streamEditEnabled">
+                                <label class="col-sm-2 control-label" for="beam">Mixer</label>
+                                <div class="col-sm-4">
+                                    <p if.bind="!_streamEditEnabled" class="form-control-static"><a href="https://www.mixer.com/${streams.beam}">${streams.beam}</a></p>
+                                    <input if.bind="_streamEditEnabled" type="text" class="form-control" id="beam" value.bind="streams.beam" placeholder="mixer.com username"/>
+                                </div>
+                            </div>
+                            <div class="form-group" if.bind="streams.youtube != '' || _streamEditEnabled">
+                                <label class="col-sm-2 control-label" for="youtube">YouTube</label>
+                                <div class="col-sm-4">
+                                    <p if.bind="!_streamEditEnabled" class="form-control-static"><a href="https://gaming.youtube.com/${streams.youtube}">${streams.youtube}</a></p>
+                                    <input if.bind="_streamEditEnabled" type="text" class="form-control" id="youtube" value.bind="streams.youtube" placeholder="gaming.youtube username"/>
+                                </div>
+                            </div>
+                            <div class="form-group" if.bind="_streamEditEnabled">
+                                <div class="col-sm-offset-2 col-sm-4">
+                                    <button type="button" class="btn btn-primary" click.delegate="setStreams()">save</button>
+                                    <button type="button" class="btn btn-link" click.delegate="disableStreamEdit()">cancel</button>
+                                </div>
+                            </div>
+                        </form>
                 </div>
-                <div style="padding-left: 1em;">
+                <div class="channels">
                         <h2>Channels</h2>
-                        <ul style="margin: 0 auto; text-align: center; padding: 0;">
-                                <li repeat.for="channel of _channels"
-                                        style="display: inline-block; vertical-align: top; background: white; border 1px solid gray; margin: 0.25em; padding: 0.25em; width: 15em;">
+                        <ul>
+                                <li repeat.for="channel of _channels">
                                         <a href="/#/channels/${channel.id}">${channel.name}</a>
                                 </li>
                         </ul>
