@@ -1,6 +1,7 @@
 {
   "name": "dashboard",
   "type": "project:application",
+  "packageManager": "npm",
   "platform": {
     "id": "web",
     "displayName": "Web",
@@ -136,13 +137,17 @@
             "resources": [
               "build/toastr.min.css"
             ],
-            "deps": ["jquery"]
+            "deps": [
+              "jquery"
+            ]
           },
           {
             "name": "bootstrap",
             "path": "../node_modules/bootstrap/dist",
             "main": "js/bootstrap.min",
-            "deps": ["jquery"],
+            "deps": [
+              "jquery"
+            ],
             "resources": [
               "css/bootstrap.css"
             ]
