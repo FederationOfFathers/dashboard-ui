@@ -6,7 +6,7 @@ import environment from '../environment';
 
 let BASE_URL = '/api/v0/';
 if (environment.debug){
-    BASE_URL = 'http://fofgaming.com:8867/api/v0/';
+    BASE_URL = '//dev.dashboard.fofgaming.com/api/v0/';
 }
 
 @inject(HttpClient)
