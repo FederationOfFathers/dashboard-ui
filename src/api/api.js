@@ -8,7 +8,7 @@ let BASE_URL = '/api/v0/';
 if (environment.apiBaseURL != undefined && environment.apiBaseURL != "") {
     BASE_URL = environment.apiBaseURL;
 } else if (environment.debug){
-    BASE_URL = '//fofgaming.com:8867/api/v0/';
+    BASE_URL = '//dev.dashboard.fofgaming.com/api/v0/';
 }
 
 @inject(HttpClient)
@@ -41,16 +41,16 @@ export class Api {
         return this.http.fetch(url)
             .then(response => {
                  switch(responseType.toLowerCase()){
-                    case 'json': 
+                    case 'json':
                         return response.json();
-                    case 'text': 
+                    case 'text':
                         return response.text();
-                    default: 
+                    default:
                         return response.json();
                 }
             })
     }
-    put(url, payload, responseType = 'text'){       
+    put(url, payload, responseType = 'text'){
         //TODO: Test to make sure this works. Not tested yet
         // var data = new FormData();
         // data.append( "json", JSON.stringify( payload ) );
@@ -64,9 +64,9 @@ export class Api {
             })
             .then(response => {
                 switch(responseType.toLowerCase()){
-                    case 'json': 
+                    case 'json':
                         return response.json();
-                    default: 
+                    default:
                         return response.text();
                 }
             })
