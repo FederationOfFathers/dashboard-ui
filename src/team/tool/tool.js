@@ -8,7 +8,7 @@ export class TeamTool {
     constructor(router){
         this._router = router;
         if(environment.debug){
-            this.teamToolLocation = "http://fofgaming.com:8867/api/v0/redirect/team-tool";
+            this.teamToolLocation = "//fofgaming.com:8867/api/v0/redirect/team-tool";
         } else {
             this.teamToolLocation = "/api/v0/redirect/team-tool";
         }

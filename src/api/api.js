@@ -5,8 +5,10 @@ import 'whatwg-fetch';
 import environment from '../environment';
 
 let BASE_URL = '/api/v0/';
-if (environment.debug){
-    BASE_URL = 'http://fofgaming.com:8867/api/v0/';
+if (environment.apiBaseURL != undefined && environment.apiBaseURL != "") {
+    BASE_URL = environment.apiBaseURL;
+} else if (environment.debug){
+    BASE_URL = '//fofgaming.com:8867/api/v0/';
 }
 
 @inject(HttpClient)
