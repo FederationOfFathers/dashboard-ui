@@ -22,9 +22,9 @@ export class Dics {
         }
     }
     activate() {
-        var userget = this.http.fetch("http://fofgaming.com:8875/v2/users.json")
+        var userget = this.http.fetch("//fofgaming.com:8875/v2/users.json")
             .then(response => response.json())
-        var statget = this.http.fetch("http://fofgaming.com:8874/v1/s/129990,129991,129992,129993,129994,129995,129996,129997,129998.json")
+        var statget = this.http.fetch("//fofgaming.com:8874/v1/s/129990,129991,129992,129993,129994,129995,129996,129997,129998.json")
             .then(response => response.json())
         return Promise.all([userget, statget]).then(([u, s]) => {
             this.users = new Map()
