@@ -1,4 +1,5 @@
 export default {
   debug: true,
-  testing: true
+  testing: true,
+  host: "dev.dashboard.fofgaming.com".
 };

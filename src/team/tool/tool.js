@@ -7,8 +7,10 @@ import environment from 'environment';
 export class TeamTool {
     constructor(router){
         this._router = router;
+
+        //TODO is this still needed?
         if(environment.debug){
-            this.teamToolLocation = "//dev.dashboard.fofgaming.com/api/v0/redirect/team-tool";
+            this.teamToolLocation = "//" + environment.host + "/api/v0/redirect/team-tool";
         } else {
             this.teamToolLocation = "/api/v0/redirect/team-tool";
         }

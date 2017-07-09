@@ -18,7 +18,7 @@ User Interface for the new dashboard project
 
 # Environment Setup
 
-1. npm install aurelia-cli -g)
+1. `npm install aurelia-cli -g`
 
 # Project setup
 
@@ -27,7 +27,7 @@ User Interface for the new dashboard project
 
 # Local Dev
 1. `cd dashboard`
-2. `au run --watch`
+2. `au run --env local --watch`
 3. Open the local URL it gives you
 4. Edit files
 
@@ -159,4 +159,3 @@ Check out the [CLI](https://github.com/aurelia/cli) for more details.
         "RequiredParams": null
       }
     ]
-  

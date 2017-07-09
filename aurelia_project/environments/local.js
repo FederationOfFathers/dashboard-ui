@@ -1,5 +1,6 @@
 export default {
   debug: true,
   testing: true,
-  apiBaseURL: "//localhost:8866/api/v0/"
+  host: "localhost:8866",
+  apiBaseURL: "//localhost:9000/api/v0/",
 };
