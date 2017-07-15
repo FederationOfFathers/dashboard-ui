@@ -19,7 +19,7 @@ export class MemberMetaApi {
     }
 
     delete(slackID, metaKey){
-        return this.api.delete("meta/member/" + slackID + "/" + metaKey);
+        this.api.delete("meta/member/" + slackID + "/" + metaKey);
     }
 
     set(slackID, metaData){
