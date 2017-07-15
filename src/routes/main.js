@@ -114,7 +114,16 @@ export default function configureMainRoutes(config, router, user, AuthorizeStep)
             settings: {
                 roles: ["anonymous"]
             }
+        },
+        {
+            route: 'oauth/:service?',
+            name: 'oauth',
+            moduleId: 'oauth/oauth',
+            title: 'OAuth Service',
+            nav: false,
+            settings: {
+                roles: ["user"]
+            }
         }
     ]);
 }
-
