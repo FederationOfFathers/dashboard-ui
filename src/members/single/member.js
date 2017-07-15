@@ -7,11 +7,12 @@ import {UserCache} from 'cache/user';
 import {UsersCache} from 'cache/users';
 import {StreamsApi} from 'api/streams';
 import {MemberMetaApi} from 'api/member-meta';
+import {YoutubeApi} from 'connections/youtube';
 
-@inject(Router, ChannelCache, UserCache, UsersCache, StreamsApi, MemberMetaApi)
+@inject(Router, ChannelCache, UserCache, UsersCache, StreamsApi, MemberMetaApi, YoutubeApi)
 export class Member{
 
-    constructor(router, channelCache, userCache, usersCache, streamsApi, memberMetaApi){
+    constructor(router, channelCache, userCache, usersCache, streamsApi, memberMetaApi, youtubeApi){
         this._router = router;
         this._channelCache = channelCache;
         this._userCache = userCache;
@@ -19,6 +20,7 @@ export class Member{
         this._editable = false
         this._streamsApi = streamsApi
         this._memberMetaApi = memberMetaApi
+        this._youtubeApi = youtubeApi;
         this._gts = []
         this._lookup = {
             gt: {},
@@ -163,10 +165,7 @@ export class Member{
                         this.streams.twitch = s.Twitch
                 }.bind(this));
 
-                this._memberMetaApi.get(this._user.Id).then(function(meta) {
-                    this.meta = meta;
-                    this.meta_original = meta;
-                }.bind(this))
+                this.loadMetaValues()
             }
             return this._channelCache.update().then(function() {
                 this._channelCache.channels.forEach(function(channel) {
@@ -180,6 +179,28 @@ export class Member{
                 }.bind(this))
             }.bind(this))
         }.bind(this))
+    }
+
+    loadMetaValues(){
+        this._memberMetaApi.get(this._user.Id).then(function(meta) {
+            this.meta = meta;
+            this.meta_original = meta;
+        }.bind(this));
+    }
+
+    connectToYouTube() {
+        let member = this;
+        this._youtubeApi.connectToYouTube(member._user.Id).then(function(data){
+            member.meta.youtube_id = data.youtube_id;
+            member.meta.youtube_name = data.youtube_name;
+        });
+    }
+
+    unlinkYoutube() {
+        this._memberMetaApi.delete(this._user.Id, "youtube_id");
+        this._memberMetaApi.delete(this._user.Id, "youtube_name");
+        this.meta.youtube_id = "";
+        this.meta.youtube_name = "";
     }
 
 }

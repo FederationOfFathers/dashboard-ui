@@ -39,6 +39,14 @@
                             <input if.bind="_metaEditEnabled" type="text" class="form-control" id="bnet" value.bind="meta.bnet" placeholder="Battle.net ID"/>
                         </div>
                     </div>
+                    <h3>Social Media</h3>
+                    <div class="form-group" if.bind="_metaEditEnabled || meta.youtube_id">
+                        <label class="col-sm-2 control-label" for="youtube">YouTube</label>
+                        <div class="col-sm-4">
+                            <p class="form-control-static" if.bind="meta.youtube_id" ><a href="http://www.youtube.com/channel/${meta.youtube_id}" target="_blank" rel="noopener noreferrer">${meta.youtube_name}</a> <button if.bind="_metaEditEnabled" type="button" class="btn btn-sm btn-link" click.delegate="unlinkYoutube()">unlink</button></p>
+                            <button if.bind="_metaEditEnabled && !meta.youtube_id" type="button" class="btn btn-default" id="youtube" click.delegate="connectToYouTube()">link</button>
+                        </div>
+                    </div>
                     <div class="form-group" if.bind="_metaEditEnabled">
                         <div class="col-sm-offset-2 col-sm-4">
                             <button type="button" class="btn btn-primary" click.delegate="setMemberMeta()">save</button>
