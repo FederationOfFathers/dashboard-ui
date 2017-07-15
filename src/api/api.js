@@ -4,19 +4,13 @@ import 'whatwg-fetch';
 
 import environment from '../environment';
 
-let BASE_URL = '/api/v0/';
-if (environment.apiBaseURL != undefined && environment.apiBaseURL != "") {
-    BASE_URL = environment.apiBaseURL;
-} else if (environment.debug){
-    BASE_URL = '//dev.dashboard.fofgaming.com/api/v0/';
-}
-
 @inject(HttpClient)
 export class Api {
     constructor(http) {
+        this._baseUrl = this.initBaseUrl();
         http.configure(config => {
             config
-                .withBaseUrl(BASE_URL)
+                .withBaseUrl(this._baseUrl)
                 .withDefaults({
                     credentials: 'include'
                 })
@@ -35,6 +29,16 @@ export class Api {
                 });
         });
         this.http = http;
+    }
+
+    initBaseUrl() {
+        let baseUrl = '/api/v0/';
+        if (environment.apiBaseURL != undefined && environment.apiBaseURL != "") {
+            baseUrl = environment.apiBaseURL;
+        } else if (environment.debug){
+            baseUrl = '//dev.dashboard.fofgaming.com/api/v0/';
+        }
+        return baseUrl;
     }
 
     get(url, responseType = 'json'){
