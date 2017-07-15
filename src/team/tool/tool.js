@@ -1,19 +1,14 @@
 import {inject} from 'aurelia-framework';
 import {Router} from 'aurelia-router';
+import {Api} from 'api/api';
 
 import environment from 'environment';
 
-@inject(Router)
+@inject(Router, Api)
 export class TeamTool {
-    constructor(router){
+    constructor(router, api){
         this._router = router;
-
-        //TODO is this still needed?
-        if(environment.debug){
-            this.teamToolLocation = "//" + environment.host + "/api/v0/redirect/team-tool";
-        } else {
-            this.teamToolLocation = "/api/v0/redirect/team-tool";
-        }
+        this.teamToolLocation = api._baseUrl + "redirect/team-tool";
     }
     activate(){
         //Sneaky way of finding out if we are navigating back to this same location
