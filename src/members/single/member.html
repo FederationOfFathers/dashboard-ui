@@ -47,6 +47,13 @@
                             <button if.bind="_metaEditEnabled && !meta.youtube_id" type="button" class="btn btn-default" id="youtube" click.delegate="connectToYouTube()">link</button>
                         </div>
                     </div>
+                    <div class="form-group" if.bind="_metaEditEnabled || meta.twitch_name">
+                        <label class="col-sm-2 control-label" for="twitch">Twitch</label>
+                        <div class="col-sm-4">
+                            <p class="form-control-static" if.bind="meta.twitch_name" ><a href="http://www.twitch.tv/${meta.twitch_name}" target="_blank" rel="noopener noreferrer">${meta.twitch_name}</a> <button if.bind="_metaEditEnabled" type="button" class="btn btn-sm btn-link" click.delegate="unlinkTwitch()">unlink</button></p>
+                            <button if.bind="_metaEditEnabled && !meta.twitch_name" type="button" class="btn btn-default" id="twitch" click.delegate="connectToTwitch()">link</button>
+                        </div>
+                    </div>
                     <div class="form-group" if.bind="_metaEditEnabled">
                         <div class="col-sm-offset-2 col-sm-4">
                             <button type="button" class="btn btn-primary" click.delegate="setMemberMeta()">save</button>

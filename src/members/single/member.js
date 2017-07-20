@@ -8,11 +8,12 @@ import {UsersCache} from 'cache/users';
 import {StreamsApi} from 'api/streams';
 import {MemberMetaApi} from 'api/member-meta';
 import {YoutubeApi} from 'connections/youtube';
+import {TwitchApi} from 'connections/twitch';
 
-@inject(Router, ChannelCache, UserCache, UsersCache, StreamsApi, MemberMetaApi, YoutubeApi)
+@inject(Router, ChannelCache, UserCache, UsersCache, StreamsApi, MemberMetaApi, YoutubeApi, TwitchApi)
 export class Member{
 
-    constructor(router, channelCache, userCache, usersCache, streamsApi, memberMetaApi, youtubeApi){
+    constructor(router, channelCache, userCache, usersCache, streamsApi, memberMetaApi, youtubeApi, twitchApi){
         this._router = router;
         this._channelCache = channelCache;
         this._userCache = userCache;
@@ -21,6 +22,7 @@ export class Member{
         this._streamsApi = streamsApi
         this._memberMetaApi = memberMetaApi
         this._youtubeApi = youtubeApi;
+        this._twitchApi = twitchApi;
         this._gts = []
         this._lookup = {
             gt: {},
@@ -196,11 +198,24 @@ export class Member{
         });
     }
 
+    connectToTwitch() {
+        let member = this;
+        this._twitchApi.connect(member._user.Id).then(function(data){
+            member.meta.twitch_name = data.twitch_name;
+        })
+
+    }
+
     unlinkYoutube() {
         this._memberMetaApi.delete(this._user.Id, "youtube_id");
         this._memberMetaApi.delete(this._user.Id, "youtube_name");
         this.meta.youtube_id = "";
         this.meta.youtube_name = "";
+    }
+
+    unlinkTwitch() {
+        this._memberMetaApi.delete(this._user.Id, "twitch_name");
+        this.meta.twitch_name = "";
     }
 
 }
