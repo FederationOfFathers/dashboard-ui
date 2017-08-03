@@ -11,6 +11,7 @@
             <div class="profile" >
                 <h2>Profile <button if.bind="_editable && !_metaEditEnabled" type="button" class="btn btn-link" click.delegate="enableMetaEdit()">edit</button></h2>
                 <form class="form-horizontal">
+                    <h3>Gaming Accounts</h3>
                     <div class="form-group" if.bind="_metaEditEnabled || meta.gt_xbox">
                         <label class="col-sm-2 control-label" for="xbox_gt">Xbox GamerTag</label>
                         <div class="col-sm-4">
@@ -36,7 +37,7 @@
                         <label class="col-sm-2 control-label" for="bnet">Battle.net</label>
                         <div class="col-sm-4">
                             <p class="form-control-static" if.bind="!_metaEditEnabled">${meta.bnet}</p>
-                            <input if.bind="_metaEditEnabled" type="text" class="form-control" id="bnet" value.bind="meta.bnet" placeholder="Battle.net ID"/>
+                            <button if.bind="_metaEditEnabled && !meta.bnet" type="button" class="btn btn-default" id="bnet" click.delegate="connectToBlizzard()">link</button>
                         </div>
                     </div>
                     <h3>Social Media</h3>

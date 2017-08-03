@@ -8,5 +8,8 @@
     } else if (window.location.pathname == "/oauth/twitch") {
         hashValues = location.hash.substring(1);
         location.href="/#/oauth/twitch?" + hashValues
+    } else if (window.location.pathname == "/oauth/battlenet") {
+        hashValues = location.hash.substring(1);
+        location.href="/#/oauth/battlenet?" + hashValues
     }
 })();

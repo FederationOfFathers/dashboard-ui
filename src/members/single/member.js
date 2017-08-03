@@ -9,11 +9,12 @@ import {StreamsApi} from 'api/streams';
 import {MemberMetaApi} from 'api/member-meta';
 import {YoutubeApi} from 'connections/youtube';
 import {TwitchApi} from 'connections/twitch';
+import {BattleNetApi} from 'connections/battlenet'
 
-@inject(Router, ChannelCache, UserCache, UsersCache, StreamsApi, MemberMetaApi, YoutubeApi, TwitchApi)
+@inject(Router, ChannelCache, UserCache, UsersCache, StreamsApi, MemberMetaApi, YoutubeApi, TwitchApi, BattleNetApi)
 export class Member{
 
-    constructor(router, channelCache, userCache, usersCache, streamsApi, memberMetaApi, youtubeApi, twitchApi){
+    constructor(router, channelCache, userCache, usersCache, streamsApi, memberMetaApi, youtubeApi, twitchApi, battleNetApi){
         this._router = router;
         this._channelCache = channelCache;
         this._userCache = userCache;
@@ -23,6 +24,7 @@ export class Member{
         this._memberMetaApi = memberMetaApi
         this._youtubeApi = youtubeApi;
         this._twitchApi = twitchApi;
+        this._battleNetApi = battleNetApi;
         this._gts = []
         this._lookup = {
             gt: {},
@@ -204,6 +206,12 @@ export class Member{
             member.meta.twitch_name = data.twitch_name;
         })
 
+    }
+    connectToBlizzard() {
+        let member = this;
+        this._battleNetApi.connect(member._user.Id).then(function(data){
+            console.log(data);
+        })
     }
 
     unlinkYoutube() {
