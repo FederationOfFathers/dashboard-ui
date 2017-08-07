@@ -43,7 +43,8 @@ export class Api {
 
     get(url, responseType = 'json'){
         let time = new Date().getTime();
-        return this.http.fetch(url + "?_=" + time)
+        let sep = url.indexOf("?") == -1 ? "?" : "&";
+        return this.http.fetch(url + sep + "_=" + time)
             .then(response => {
                  switch(responseType.toLowerCase()){
                     case 'json':

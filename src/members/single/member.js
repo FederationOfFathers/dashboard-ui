@@ -210,7 +210,7 @@ export class Member{
     connectToBlizzard() {
         let member = this;
         this._battleNetApi.connect(member._user.Id).then(function(data){
-            console.log(data);
+            member.meta.bnet = data.bnet_username;
         })
     }
 
