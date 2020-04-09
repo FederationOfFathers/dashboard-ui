@@ -60,7 +60,7 @@
     "requirejs": "^2.3.2",
     "text": "github:requirejs/text#latest",
     "through2": "^2.0.1",
-    "uglify-js": "^2.6.3",
+    "uglify-js": "^3.8.1",
     "vinyl-fs": "^2.4.3"
   }
 }
